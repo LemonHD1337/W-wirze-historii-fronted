@@ -1,13 +1,414 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+    --white: #FFFFFF;
+    --border: #EEEEEE;
+    --white2: #e6e4e4;
+    --yellow: #FFC600;
+    --black: #030303;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a{
+    text-decoration: none;
+}
+
+* {
+    color: var(--black);
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--white);
+    font-size: medium;
+  }
+
+  p.error{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  svg.password{
+    cursor: pointer;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+div#root{
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    border-bottom: 2px solid #EEEEEE;
+}
+
+.logo-div{
+    width: 30%;
+    height: 100%;
+}
+
+.login-div{
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-btn a{
+    background-color: var(--yellow);
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
+    font-size: larger;
+    text-decoration: none;
+}
+
+.login-btn{
+    width: 80%;
+    margin-right: 10px;
+    height: 50px;
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.login-btn:hover{
+    width: 90%;
+}
+
+nav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.first-nav-list{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style-type: none;
+    position: relative;
+}
+
+.first-nav-list li{
+    font-weight: 500;
+    width: 33%;
+    margin-top: 10px;
+    height: 50%;
+    font-size: larger;
+    text-align: center;
+    position: relative;
+}
+
+.first-nav-list li svg{
+    position: relative;
+    top: 5px;
+}
+
+.first-nav-list li div{
+    width: 100%;
+    position: absolute;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: none; 
+    transition: 0.3s;
+    z-index: 10000000;
+}
+
+.first-nav-list li:hover div{
+    display: block;
+}
+
+.first-nav-list li:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.container-list{
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+}
+
+.container-list li{
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    font-size: medium;
+    text-align: center;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container{
+    width: 30%;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 200px;
+    padding: 10px;
+}
+
+.login-container h1{
+    margin: 10px;
+}
+
+.login-container form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container form div{
+    width: 80%;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.input-container input{
+    width: 80%;
+    height: 90%;
+    background: transparent;
+    border: 2px solid var(--border);
+    outline: none;
+    padding: 8px;
+    border-radius: 20px;
+}
+
+.input-container svg{
+    position: relative;
+    right: 30px;
+}
+
+.input-container input::placeholder{
+    color: black;
+    font-weight: bold;
+}
+
+.remember-forgot label{
+    cursor: pointer;
+}
+
+.login-register-btn{
+    width: 50%;
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 16px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.login-register-btn:hover{
+    width: calc(50% + 20px);
+    text-decoration: underline;
+}
+
+.login-container form p a{
+    text-decoration: underline;
+    color: var(--yellow)
+}
+
+
+.userlist-div{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: block;
+    background: none;
+}
+
+.profile-pic{
+    height: 80%;
+    margin: 10px 25% 0 25%;
+}
+
+.userlist-div div{
+    width: 100%;
+    position: absolute;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: none;
+    transition: 0.3s;
+}
+
+.userlist-div:hover div{
+    display: block;
+}
+
+.userlist-div:hover div .container-list{
+    margin-right: 10px;
+}
+
+div.container{
+    width: 90%;
+    height: 80%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#map{
+    width: 80%;
+    height: 100%;
+}
+
+img#loading{
+    width: 150px;
+    position: fixed;
+    top: 40%;
+    background: none;
+}
+
+.guess-date-container{
+    width: 90%;
+    display: flex;
+    margin: 50px;
+}
+
+.guess-date-tools{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.guess-date-container-game{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guess-date-container h1{
+    text-align: center;
+    font-size: x-large;
+}
+
+.guess-date-container .inputs-container{
+    width: 100%;
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.guess-date-container .inputs-container input{
+    width: 200px;
+    margin: 0 20px;
+    outline: none;
+    border: 1px solid var(--border); 
+    border-radius: 16px;
+    padding: 2px 10px;
+}
+
+.btn-container-guess-date{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-container-guess-date button{
+    width: 150px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background-color: var(--yellow);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-container-guess-date button:hover{
+    width: 170px;
+}
+
+.result-guess-date{
+    margin-top: 5px;
+    width: 100%;
+}
+
+.result-guess-date p{
+    text-align: center;
+}
+
+.guess-date-info{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.first-login-container, .first-register-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guess-date-tools p{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.guess-date-tools div{
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.guess-date-tools div input{
+    width: 200px;
+    margin: 0 20px;
+    outline: none;
+    border: 1px solid var(--border); 
+    border-radius: 16px;
+    padding: 2px 10px;
+}
+
+.guess-date-tools div button{
+    width: 150px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background-color: var(--yellow);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.guess-date-tools div button:hover{
+    width: 170px;
 }
