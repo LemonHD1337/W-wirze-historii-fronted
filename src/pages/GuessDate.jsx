@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { urlGetDataGuessDate } from "../services/api/endpoints";
+import { useEffect, useState } from "react";
+import { urlGetRecordGuessDate } from "../services/api/endpoints";
 import Loading from "../components/Loading";
 import axios from "axios";
-import authContext from "../store/authContext";
-import GuessDateTools from "../components/GuessDateTools";
+import GuessDateGame from "../components/GuessDateGame";
 
 const GuessDate = () => {
   const [data, setData] = useState(null);
@@ -13,8 +12,7 @@ const GuessDate = () => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [result, setResult] = useState("");
-
-  const { user } = useContext(authContext);
+  const [next, setNext] = useState(0);
 
   const handleChange = (e) => {
     if (e.target.name === "day") {
@@ -65,14 +63,17 @@ const GuessDate = () => {
     if (dayVal && monthVal && yearVal) {
       setResult("Brawo! Podałeś prawidłową odpowiedź");
     } else {
-      setResult("Niestety! Zrobiłeś błąd");
+      setResult(
+        "Niestety! Zrobiłeś błąd. Prawidołowa odpowiedz to: " +
+          `${data.day}-${data.month}-${data.year}`
+      );
     }
   };
 
   useEffect(() => {
     const fetechData = async () => {
       axios
-        .get(urlGetDataGuessDate)
+        .get(urlGetRecordGuessDate)
         .then((res) => {
           setData(res.data);
         })
@@ -83,71 +84,24 @@ const GuessDate = () => {
     };
 
     fetechData();
-  }, []);
-
-  const showTools = () => {
-    if (user.role === "creator " || user.role === "admin") {
-      return <GuessDateTools />;
-    }
-  };
+  }, [next]);
 
   //render
   if (isLoading) {
     return <Loading />;
   }
 
-  if (!data) {
-    return <Loading />;
-  }
-
   return (
     <div className="guess-date-container">
-      {showTools()}
-      <div className="guess-date-container-game">
-        <div className="guess-date-info">
-          <h2>Informacje o grze</h2>
-          <p>W tej grze trzeba podać datę wydarzenia podanego poniżej: </p>
-        </div>
-
-        <h1>{data.title}</h1>
-
-        <div className="inputs-container">
-          <div>
-            <input
-              type="text"
-              placeholder="dzień"
-              name="day"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              type="text"
-              placeholder="miesiąc"
-              name="month"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              type="text"
-              placeholder="rok"
-              name="year"
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div className="btn-container-guess-date">
-          <button onClick={handleClick}>Sprawdź</button>
-        </div>
-
-        <div className="result-guess-date">
-          {error ? <p>{error}</p> : <p>{result}</p>}
-        </div>
-      </div>
+      <GuessDateGame
+        data={data}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        result={result}
+        setNext={setNext}
+        next={next}
+      />
+      <p>{error}</p>
     </div>
   );
 };

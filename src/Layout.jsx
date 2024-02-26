@@ -4,20 +4,25 @@ import authContext, { defaultObjectauthContext } from "./store/authContext";
 //router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+//component
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 //pages
-import Header from "./pages/Header";
 import EventsMaps from "./pages/EventsMaps";
 import Events from "./pages/Events";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import WarMapsPage from "./pages/WarMapsPage";
 import GuessDate from "./pages/GuessDate";
 import HistoricalFigures from "./pages/HistoricalFigures";
-import Footer from "./pages/Footer";
-import Favorite from "./pages/Favorite";
+import AddContent from "./pages/AddContent";
 import Logout from "./pages/Logout";
 import UserSettings from "./pages/UserSettings";
+import HistoricalFigure from "./pages/HistoricalFigure";
+import Event from "./pages/Event";
+import Contact from "./pages/Contact";
+import Authors from "./pages/Authors";
 
 //utils
 import getDataFromCookie from "./utils/getDataFromCookie";
@@ -47,16 +52,16 @@ const Layout = () => {
               <Route path="/login" Component={Login} />
               <Route path="/register" Component={Register} />
               <Route path="/eventsMaps" Component={EventsMaps} />
-              <Route path="/warMapsPage" Component={WarMapsPage} />
               <Route path="/games/guessDate" Component={GuessDate} />
               <Route path="/all/events" Component={Events} />
-              <Route
-                path="/all/historicalFigures"
-                Component={HistoricalFigures}
-              />
+              <Route path="/all/events/:id" Component={Event} />
+              <Route path="/all/historicalFigures" Component={HistoricalFigures} />
+              <Route path="/all/historicalFigures/:id" Component={HistoricalFigure} />
               <Route path="/user/settings" Component={UserSettings} />
-              <Route path="/user/favorite" Component={Favorite} />
+              <Route path="/user/addContent" Component={AddContent} />
               <Route path="/user/logout" Component={Logout} />
+              <Route path="/contact" Component={Contact} />
+              <Route path="/authors" Component={Authors} />
             </Routes>
           </main>
           <Footer />
