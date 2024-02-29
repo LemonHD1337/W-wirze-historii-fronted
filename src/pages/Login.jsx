@@ -107,13 +107,13 @@ const Login = () => {
   };
 
   return (
-    <div className="first-login-container">
-      <div className="login-container">
-        <h1>Zaloguj się</h1>
-
+    <div className="h-full w-full flex justify-center items-center">
+      <div className="border w-1/3 shadow-lg text-center p-8 rounded-xl md:w-3/4">
+        <h1 className="font-bold text-2xl">Zaloguj się</h1>
         <form onSubmit={handleSubmit}>
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="email"
               placeholder="Email"
               value={email}
@@ -123,18 +123,19 @@ const Login = () => {
             <MdOutlineEmail />
           </div>
 
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="password"
               placeholder="Hasło"
               value={password}
               onChange={handleChange}
               name="password"
             />
-            <FaRegEye onClick={handleShowPassword} className="password" />
+            <FaRegEye onClick={handleShowPassword} className="cursor-pointer" />
           </div>
 
-          <div className="remember-forgot">
+          <div className="div-input">
             <label htmlFor="rememberMe">
               <input
                 type="checkbox"
@@ -147,16 +148,16 @@ const Login = () => {
             </label>
           </div>
 
-          <button className="login-register-btn" type="submit">
+          <button className="btn mb-5" type="submit">
             Zaloguj się
           </button>
           <p>
             Nie masz konta?{" "}
-            <Link to={"/register"} className="registerLink">
+            <Link to={"/register"} className="text-custom-400">
               Utwórz konto!
             </Link>
           </p>
-          <p>Nie pamiętasz hasła?</p>
+          <p className="cursor-pointer">Nie pamiętasz hasła?</p>
           <p id="login-err" className="error"></p>
         </form>
       </div>

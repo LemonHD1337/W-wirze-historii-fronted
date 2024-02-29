@@ -8,7 +8,7 @@ import DeleteUser from "../components/DeleteUser";
 const UserSettings = () => {
   const { user } = useContext(authContext);
   return (
-    <div>
+    <div className="w-full h-full flex flex-col items-center mt-2">
       <UserInfo id={user.userId} />
       <ChangePassword id={user.userId} />
       <DeleteUser id={user.userId} />

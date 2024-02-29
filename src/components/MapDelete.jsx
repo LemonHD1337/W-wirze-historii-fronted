@@ -25,9 +25,9 @@ const MapDelete = ({ id }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Usuń mapę</h1>
-      <button>{isLoading ? "usuwanie..." : "usuń mapę"}</button>
+    <form onSubmit={handleSubmit} className="form mt-2">
+      <h1 className="font-bold text-2xl">Usuń mapę</h1>
+      <button className="btn mt-2">{isLoading ? "usuwanie..." : "usuń mapę"}</button>
       <p>{message}</p>
     </form>
   );

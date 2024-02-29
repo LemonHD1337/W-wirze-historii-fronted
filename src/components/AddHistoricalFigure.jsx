@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { urlInsertContentHistoricalFigures } from "../services/api/endpoints";
 import axios from "axios";
 
@@ -8,6 +8,9 @@ const AddHistoricalFigure = () => {
   const [death, setDeath] = useState("");
   const [pic, setPic] = useState(null);
   const [doc, setDoc] = useState(null);
+
+  const refPic = useRef();
+  const refDoc = useRef();
 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
@@ -40,8 +43,8 @@ const AddHistoricalFigure = () => {
         setName(null);
         setBirth(null);
         setDeath(null);
-        setDoc(null);
-        setPic(null);
+        refDoc.current.value = "";
+        refPic.current.value = "";
         setMessage("dodano zawartość");
       })
       .catch((err) => {
@@ -52,44 +55,69 @@ const AddHistoricalFigure = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <h1>Dodaj treść</h1>
-      <label>
-        dodaj zdjęcie postaci
+    <form onSubmit={handleSubmit} encType="multipart/form-data" className="form">
+      <h1 className="font-bold text-2xl">Dodaj treść</h1>
+      <div className="div-input">
+        <label>
+          dodaj zdjęcie postaci
+          <br />
+          <input
+            type="file"
+            name="pic"
+            onChange={handleChange}
+            className="input"
+            accept="image/*"
+          />
+        </label>
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="imię i nazwisko"
+          name="name"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="data i miejsce urodzenia"
+          name="birth"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="data i miejsce śmierci"
+          name="death"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+
+      <div className="div-input">
         <br />
-        <input type="file" name="pic" onChange={handleChange} />
-      </label>
-      <br />
-      <input
-        type="text"
-        placeholder="imię i nazwisko"
-        name="name"
-        onChange={handleChange}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="data i miejsce urodzenia"
-        name="birth"
-        onChange={handleChange}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="data i miejsce śmierci"
-        name="death"
-        onChange={handleChange}
-      />
-      <br />
-      <label>
-        dodaj opis związany z tą osobą w dokumencie word. Proszę unikać dodawania zdjęć w
-        dokumencie.
-        <br />
-        <input type="file" name="doc" onChange={handleChange} />
-      </label>
+        <label>
+          dodaj opis związany z tą osobą w dokumencie word. Proszę unikać dodawania zdjęć
+          w dokumencie.
+          <br />
+          <input
+            type="file"
+            name="doc"
+            onChange={handleChange}
+            className="input"
+            accept=".doc, .docx"
+          />
+        </label>
+      </div>
 
       <div>
-        <button>{isLoading ? "dodawanie ..." : "Dodaj nową treść"}</button>
+        <button className="btn">
+          {isLoading ? "dodawanie ..." : "Dodaj nową treść"}
+        </button>
         <p>{message}</p>
       </div>
     </form>

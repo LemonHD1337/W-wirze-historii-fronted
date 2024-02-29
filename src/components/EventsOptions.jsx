@@ -7,7 +7,7 @@ const EventsOptions = () => {
 
   return (
     <>
-      <select onChange={(e) => setEra(e.target.value)}>
+      <select onChange={(e) => setEra(e.target.value)} className="input">
         <option value="Prehistoria">Prehistoria</option>
         <option value="Starożytność">Starożytność</option>
         <option value="Średniowiecze">Średniowiecze</option>

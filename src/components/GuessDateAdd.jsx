@@ -48,10 +48,9 @@ const GuessDateAdd = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const isValidated = validate();
-
-    console.log("klik", isValidated);
 
     if (isValidated) {
       const data = {
@@ -79,26 +78,52 @@ const GuessDateAdd = () => {
   };
 
   return (
-    <div className="guess-date-tools">
-      <h1>Narzedzia</h1>
+    <form
+      onSubmit={handleSubmit}
+      className="w-2/5 text-center border border-bor shadow rounded-xl p-5">
+      <h1 className="text-2xl font-bold">Narzedzia</h1>
       <p>Miesiąc należy podać w formie liczbowej</p>
-      <div>
-        <input type="text" placeholder="Tytuł" name="title" onChange={handleChange} />
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="Tytuł"
+          name="title"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="dzień"
+          name="day"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="miesiąc"
+          name="month"
+          onChange={handleChange}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          type="text"
+          placeholder="rok"
+          name="year"
+          onChange={handleChange}
+          className="input"
+        />
       </div>
       <div>
-        <input type="text" placeholder="dzień" name="day" onChange={handleChange} />
-      </div>
-      <div>
-        <input type="text" placeholder="miesiąc" name="month" onChange={handleChange} />
-      </div>
-      <div>
-        <input type="text" placeholder="rok" name="year" onChange={handleChange} />
-      </div>
-      <div>
-        <button onClick={handleClick}>{isLoading ? <Loading /> : "Dodaj treść"}</button>
+        <button className="btn">{isLoading ? <Loading /> : "Dodaj treść"}</button>
       </div>
       <p>{status}</p>
-    </div>
+    </form>
   );
 };
 

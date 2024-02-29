@@ -42,6 +42,7 @@ const MapOptions = () => {
     if (data) {
       return (
         <select
+          className="input my-2"
           onChange={(e) => {
             setSelectedMap(e.target.value);
           }}>
@@ -77,10 +78,13 @@ const MapOptions = () => {
 
   return (
     <>
-      <p>Aby wyświetlić mapę trzeba najpierw wybrać epokę, która odpowiada mapie</p>
+      <p className="text-lg">
+        Aby wyświetlić mapę trzeba najpierw wybrać epokę, która odpowiada mapie
+      </p>
 
       <div>
         <select
+          className="input mt-2"
           onChange={(e) => {
             const value = e.target.value;
             if (value !== 0) {

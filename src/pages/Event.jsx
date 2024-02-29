@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { baseURL, urlGetEvent } from "../services/api/endpoints";
 import axios from "axios";
+import convertMonthToName from "../utils/convertMonthToName";
 
 const Event = () => {
   const [data, setData] = useState();
@@ -15,7 +16,6 @@ const Event = () => {
     axios
       .get(urlGetEvent + id)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {
@@ -37,12 +37,26 @@ const Event = () => {
   }
 
   return (
-    <div className="info-figure-container">
-      <div className="info">
-        <img src={baseURL + "/" + data.image} alt="" />
-        <p>{data.day}</p>
+    <div className="w-full h-full flex md:flex-col">
+      <div className="w-1/4 h-full p-2 text-center border-r-2 border-bor md:w-full md:h-fit">
+        <h1 className="text-2xl font-bold">{data.title}</h1>
+        <div>
+          <img
+            src={baseURL + "/" + data.image}
+            alt="zdjecie wydarzenia"
+            className="w-full  object-contain aspect-auto"
+          />
+        </div>
+        <div className="w-full mt-3 text-lg ">
+          <p>
+            Data wydarzenia: {data.day} {convertMonthToName(data.month)} {data.year}
+          </p>
+        </div>
       </div>
-      <div className="content" dangerouslySetInnerHTML={{ __html: data.content }}></div>
+
+      <div
+        className="w-3/4 h-full p-2 overflow-y-auto md:w-full ol ul h1 p"
+        dangerouslySetInnerHTML={{ __html: data.content }}></div>
     </div>
   );
 };

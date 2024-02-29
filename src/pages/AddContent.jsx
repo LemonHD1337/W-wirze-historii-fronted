@@ -31,22 +31,31 @@ const AddContent = () => {
   };
 
   return (
-    <div className="add-content-container">
-      <aside>
-        <div name="guessDate" onClick={handleClick}>
+    <div className="w-full h-full flex mt-2">
+      <aside className="w-1/4 text-center">
+        <div
+          name="guessDate"
+          onClick={handleClick}
+          className="p-2 text-lg hover:bg-white-200">
           Gra
         </div>
-        <div name="historicalFigures" onClick={handleClick}>
+        <div
+          name="historicalFigures"
+          onClick={handleClick}
+          className="p-2 text-lg hover:bg-white-200">
           Postacie historyczne
         </div>
-        <div name="events" onClick={handleClick}>
+        <div
+          name="events"
+          onClick={handleClick}
+          className="p-2 text-lg hover:bg-white-200">
           Wydarzenia historyczne
         </div>
-        <div name="map" onClick={handleClick}>
+        <div name="map" onClick={handleClick} className="p-2 text-lg hover:bg-white-200">
           Mapa
         </div>
       </aside>
-      <div className="content-option">{showOptions()}</div>
+      <div className="w-3/4 flex flex-col items-center mt-2">{showOptions()}</div>
     </div>
   );
 };

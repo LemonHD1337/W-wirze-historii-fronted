@@ -6,31 +6,53 @@ const GuessDateGame = ({ data, handleChange, handleClick, result, setNext, next 
   }
 
   return (
-    <div className="guess-date-container-game">
+    <div className="p-5 text-center">
       <div className="guess-date-info">
-        <h2>Informacje o grze</h2>
-        <p>W tej grze trzeba podać datę wydarzenia podanego poniżej: </p>
+        <h2 className="font-bold text-2xl">Informacje o grze</h2>
+        <p className="text">W tej grze trzeba podać datę wydarzenia podanego poniżej: </p>
       </div>
 
-      <h1>{data.title}</h1>
+      <h1 className="font-bold text-2xl my-2">{data.title}</h1>
 
-      <div className="inputs-container">
-        <div>
-          <input type="text" placeholder="dzień" name="day" onChange={handleChange} />
+      <div className="w-full h-full flex justify-center md:flex-col">
+        <div className="div-input">
+          <input
+            type="text"
+            placeholder="dzień"
+            name="day"
+            onChange={handleChange}
+            className="input"
+          />
         </div>
 
-        <div>
-          <input type="text" placeholder="miesiąc" name="month" onChange={handleChange} />
+        <div className="div-input">
+          <input
+            type="text"
+            placeholder="miesiąc"
+            name="month"
+            onChange={handleChange}
+            className="input"
+          />
         </div>
 
-        <div>
-          <input type="text" placeholder="rok" name="year" onChange={handleChange} />
+        <div className="div-input">
+          <input
+            type="text"
+            placeholder="rok"
+            name="year"
+            onChange={handleChange}
+            className="input"
+          />
         </div>
       </div>
 
-      <div className="btn-container-guess-date">
-        <button onClick={handleClick}>Sprawdź</button>
-        <button onClick={(e) => setNext(next++)}>Następne</button>
+      <div>
+        <button onClick={handleClick} className="btn m-2">
+          Sprawdź
+        </button>
+        <button onClick={(e) => setNext(next++)} className="btn m-2">
+          Następne
+        </button>
       </div>
 
       <div className="result-guess-date">

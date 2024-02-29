@@ -29,8 +29,9 @@ const Map = ({ urlMap, source, setLat, setLng, waypoints }) => {
       attribution: `<a href="${source}">Źródło</a>`,
     });
 
+    map.addLayer(title);
+
     if (waypoints.length !== 0) {
-      map.addLayer(title);
       var myIcon = L.icon({
         iconUrl: markerImg,
         iconSize: [32, 32],

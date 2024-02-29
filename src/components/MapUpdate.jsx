@@ -54,10 +54,11 @@ const MapUpdate = ({ id }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Edutuj mapę</h1>
-      <div>
+    <form onSubmit={handleSubmit} className="form mt-2">
+      <h1 className="font-bold text-2xl">Edutuj mapę</h1>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           value={title}
           onChange={(e) => {
@@ -65,11 +66,17 @@ const MapUpdate = ({ id }) => {
           }}
         />
       </div>
-      <div>
-        <input type="text" value={source} onChange={(e) => setSource(e.target.value)} />
-      </div>
-      <div>
+      <div className="div-input">
         <input
+          type="text"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+          className="input"
+        />
+      </div>
+      <div className="div-input">
+        <input
+          className="input"
           type="text"
           value={imageURL}
           onChange={(e) => {
@@ -77,7 +84,9 @@ const MapUpdate = ({ id }) => {
           }}
         />
       </div>
-      <button>{isLoading ? "przetwarzanie..." : "zmodyfikuj mapę"}</button>
+      <button className="btn mt-2">
+        {isLoading ? "przetwarzanie..." : "zmodyfikuj mapę"}
+      </button>
       <p>{message}</p>
     </form>
   );

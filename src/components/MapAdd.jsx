@@ -40,10 +40,11 @@ const MapAdd = ({ era }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Dodaj Mapę</h1>
-      <div>
+    <form onSubmit={handleSubmit} className="form">
+      <h1 className="font-bold text-2xl">Dodaj Mapę</h1>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="nazwa mapy"
           value={title}
@@ -51,8 +52,9 @@ const MapAdd = ({ era }) => {
         />
       </div>
 
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="link do strony"
           value={source}
@@ -61,8 +63,9 @@ const MapAdd = ({ era }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="link do mapy"
           value={imageURL}
@@ -71,7 +74,7 @@ const MapAdd = ({ era }) => {
           }}
         />
       </div>
-      <button>{isLoading ? "przetwarzanie..." : "dodaj mapę"}</button>
+      <button className="btn">{isLoading ? "przetwarzanie..." : "dodaj mapę"}</button>
       <p>{message}</p>
     </form>
   );

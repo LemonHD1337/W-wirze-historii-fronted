@@ -25,11 +25,13 @@ const DeleteHistoricalFigure = ({ id }) => {
   };
 
   return (
-    <div>
-      <p>
+    <div className="form mt-2">
+      <p className="text-lg">
         Aby usunąć wpis należy wybrać u góry konkretny wpis i kliknąć przycisk poniżej
       </p>
-      <button onClick={handleClick}>{isLoading ? "usuwanie..." : "usuń"}</button>
+      <button onClick={handleClick} className="btn mt-2">
+        {isLoading ? "usuwanie..." : "usuń"}
+      </button>
       <p>{message}</p>
     </div>
   );

@@ -33,7 +33,7 @@ const GuessDateOptions = () => {
   return (
     <>
       <GuessDateAdd />
-      <select onChange={handleChange}>
+      <select onChange={handleChange} className="input mt-3">
         <option value={0}>Wybierz datę którą chcesz zmodyfikować</option>
         {data.map((record) => {
           return (

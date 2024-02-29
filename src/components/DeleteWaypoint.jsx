@@ -26,10 +26,11 @@ const DeleteWaypoint = ({ waypoints }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Usuń zaznacznik</h1>
-      <p>Należy wybrać zaznacznik z listy, który chcesz usunąć</p>
+    <form onSubmit={handleSubmit} className="w-full text-center m-2">
+      <h1 className="text-2xl font-bold">Usuń zaznacznik</h1>
+      <p className="font-lg">Należy wybrać zaznacznik z listy, który chcesz usunąć</p>
       <select
+        className="input"
         onChange={(e) => {
           setSelectedWaypointId(e.target.value);
         }}>
@@ -42,7 +43,10 @@ const DeleteWaypoint = ({ waypoints }) => {
           );
         })}
       </select>
-      <button>{isLoading ? "usuwanie..." : "Usuń zaznacznik"}</button>
+      <br />
+      <button className="btn mt-2">
+        {isLoading ? "usuwanie..." : "Usuń zaznacznik"}
+      </button>
       <p>{message}</p>
     </form>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import authContext, { defaultObjectauthContext } from "./store/authContext";
 
 //router
@@ -42,11 +42,11 @@ const Layout = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <authContext.Provider value={{ user, setUser }}>
         <Router>
           <Header />
-          <main id="main">
+          <main id="main" className="w-full h-5/6">
             <Routes>
               <Route path="/" exact Component={HomePage} />
               <Route path="/login" Component={Login} />
@@ -67,7 +67,7 @@ const Layout = () => {
           <Footer />
         </Router>
       </authContext.Provider>
-    </React.Fragment>
+    </>
   );
 };
 

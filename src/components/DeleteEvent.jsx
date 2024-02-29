@@ -41,8 +41,8 @@ const DeleteEvent = ({ era }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <select onChange={(e) => setEventId(e.target.value)}>
+    <form onSubmit={handleSubmit} className="form mt-2">
+      <select onChange={(e) => setEventId(e.target.value)} className="input">
         <option value={0}>Wybierz wpis</option>
         {data.map((element) => {
           return (
@@ -52,7 +52,8 @@ const DeleteEvent = ({ era }) => {
           );
         })}
       </select>
-      <button>{isLoading ? "przetwarzanie..." : "Usuń wpis"}</button>
+      <br />
+      <button className="btn mt-2">{isLoading ? "przetwarzanie..." : "Usuń wpis"}</button>
       <p>{message}</p>
     </form>
   );

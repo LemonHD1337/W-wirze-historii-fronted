@@ -58,11 +58,14 @@ const UserInfo = ({ id }) => {
   }
 
   return (
-    <div>
-      <h1>Zmień dane</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="w-1/5">
+      <form
+        onSubmit={handleSubmit}
+        className="shadow border border-bor p-5 text-center rounded-xl ">
+        <h1 className="font-bold text-2xl">Zmień dane</h1>
+        <div className="div-input">
           <input
+            className="input"
             type="text"
             value={name}
             onChange={(e) => {
@@ -70,8 +73,9 @@ const UserInfo = ({ id }) => {
             }}
           />
         </div>
-        <div>
+        <div className="div-input">
           <input
+            className="input"
             type="text"
             value={surname}
             onChange={(e) => {
@@ -79,8 +83,9 @@ const UserInfo = ({ id }) => {
             }}
           />
         </div>
-        <div>
+        <div className="div-input">
           <input
+            className="input"
             type="email"
             value={email}
             onChange={(e) => {
@@ -88,7 +93,9 @@ const UserInfo = ({ id }) => {
             }}
           />
         </div>
-        <button type="submit">{isLoading ? "przetwarzanie" : "zmień danę"}</button>
+        <button type="submit" className="btn">
+          {isLoading ? "przetwarzanie" : "zmień danę"}
+        </button>
         <p>{message}</p>
       </form>
     </div>

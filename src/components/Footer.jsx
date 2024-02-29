@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
-      <ul>
-        <li>
+    <footer className="fixed bottom-0 bg-black w-full text-white h-12 flex justify-center items-center">
+      <ul className="flex">
+        <li className="p-3">
           <Link to="/contact">Kontakt</Link>
         </li>
-        <li>
+        <li className="p-3">
           <Link to="/authors">Autorzy</Link>
         </li>
       </ul>

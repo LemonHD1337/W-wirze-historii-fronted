@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { urlCreateEvent } from "../services/api/endpoints";
 
@@ -9,6 +9,9 @@ const AddEvent = ({ era }) => {
   const [year, setYear] = useState();
   const [pic, setPic] = useState();
   const [doc, setDoc] = useState();
+
+  const refPic = useRef();
+  const refDoc = useRef();
 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
@@ -35,12 +38,12 @@ const AddEvent = ({ era }) => {
       })
       .then((res) => {
         setMessage("dodano wpis");
-        setTitle();
-        setDay();
-        setMonth();
-        setYear();
-        setPic();
-        setDoc();
+        setTitle("");
+        setDay("");
+        setMonth("");
+        setYear("");
+        refDoc.current.value = "";
+        refPic.current.value = "";
       })
       .catch((err) => {
         console.log(err);
@@ -52,10 +55,11 @@ const AddEvent = ({ era }) => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-      <h1>Dodaj wpis</h1>
-      <div>
+    <form encType="multipart/form-data" onSubmit={handleSubmit} className="form mt-2">
+      <h1 className="text-2xl font-bold">Dodaj wpis</h1>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="Nazwa wydarzenia"
           value={title}
@@ -64,8 +68,9 @@ const AddEvent = ({ era }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="dzień wydarzenia"
           value={day}
@@ -74,8 +79,9 @@ const AddEvent = ({ era }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="miesiąc wydarzenia"
           value={month}
@@ -84,8 +90,9 @@ const AddEvent = ({ era }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           placeholder="rok wydarzenia"
           value={year}
@@ -94,29 +101,35 @@ const AddEvent = ({ era }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <label>
           Dodaj zdjęcie wydarzenia
           <input
+            className="input"
             type="file"
             onChange={(e) => {
               setPic(e.target.files[0]);
             }}
+            ref={refPic}
+            accept="image/*"
           />
         </label>
       </div>
-      <div>
+      <div className="div-input">
         <label>
           Dodaj treść w word
           <input
+            className="input"
             type="file"
             onChange={(e) => {
               setDoc(e.target.files[0]);
             }}
+            accept=".doc, .docx"
+            ref={refDoc}
           />
         </label>
       </div>
-      <button>{isLoading ? "przetwarzanie ..." : "dodaj wpis"}</button>
+      <button className="btn">{isLoading ? "przetwarzanie ..." : "dodaj wpis"}</button>
       <p>{message}</p>
     </form>
   );

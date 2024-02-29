@@ -33,9 +33,13 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Dodaj zaznacznik</h1>
+    <form
+      onSubmit={handleSubmit}
+      className="w-full m-2 text-center border-y-2 border-bor p-5">
+      {console.log("add waypoint sie wykonuje!")}
+      <h1 className="font-bold text-2xl">Dodaj zaznacznik</h1>
       <select
+        className="input"
         onChange={(e) => {
           const title = e.target.selectedOptions[0].getAttribute("title");
           setSelectedEventTitle(title);
@@ -50,9 +54,14 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
           );
         })}
       </select>
-      <input type="text" placeholder="Latitude" value={lat} />
-      <input type="text" placeholder="Longitude" value={lng} />
-      <button>{isLoading ? "przetwarzanie..." : "Dodaj zaznacznik"}</button>
+      <br />
+      <input type="text" placeholder="Latitude" value={lat} className="input my-2" />
+      <br />
+      <input type="text" placeholder="Longitude" value={lng} className="input my-2" />
+      <br />
+      <button className="btn">
+        {isLoading ? "przetwarzanie..." : "Dodaj zaznacznik"}
+      </button>
       <p>{message}</p>
     </form>
   );

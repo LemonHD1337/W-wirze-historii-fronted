@@ -92,7 +92,7 @@ const GuessDate = () => {
   }
 
   return (
-    <div className="guess-date-container">
+    <div className="w-full h-full flex justify-center items-center">
       <GuessDateGame
         data={data}
         handleChange={handleChange}
@@ -101,7 +101,7 @@ const GuessDate = () => {
         setNext={setNext}
         next={next}
       />
-      <p>{error}</p>
+      <p className="text-red-700">{error}</p>
     </div>
   );
 };

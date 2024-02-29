@@ -40,11 +40,14 @@ const ChangePassword = ({ id }) => {
   };
 
   return (
-    <div>
-      <h1>Zmień hasło</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="w-1/5 mt-2">
+      <form
+        onSubmit={handleSubmit}
+        className="text-center border border-bor rounded-xl shadow p-5">
+        <h1 className="font-bold text-2xl">Zmień hasło</h1>
+        <div className="div-input">
           <input
+            className="input"
             type="password"
             value={password}
             onChange={(e) => {
@@ -52,8 +55,9 @@ const ChangePassword = ({ id }) => {
             }}
           />
         </div>
-        <div>
+        <div className="div-input">
           <input
+            className="input"
             type="password"
             value={password2}
             onChange={(e) => {
@@ -61,7 +65,7 @@ const ChangePassword = ({ id }) => {
             }}
           />
         </div>
-        <button>{isLoading ? "przetwarzanie..." : "zmień hasło"}</button>
+        <button className="btn">{isLoading ? "przetwarzanie..." : "zmień hasło"}</button>
         <p>{message}</p>
       </form>
     </div>

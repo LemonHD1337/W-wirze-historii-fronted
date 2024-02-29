@@ -100,29 +100,24 @@ const EventsMaps = () => {
   };
 
   const showAddWaypoint = () => {
-    if (eventsList.length !== 0 && mapId) {
-      return <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />;
+    if (user.role === "admin" || user.role === "creator") {
+      if (eventsList.length !== 0 && mapId) {
+        return <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />;
+      }
     }
-    return null;
   };
 
   const showDeleteWaypoints = () => {
-    if (waypoints.length !== 0) {
-      return <DeleteWaypoint waypoints={waypoints} />;
-    }
-  };
-
-  const showTools = () => {
     if (user.role === "admin" || user.role === "creator") {
-      showAddWaypoint();
-      showDeleteWaypoints();
+      if (waypoints.length !== 0) {
+        return <DeleteWaypoint waypoints={waypoints} />;
+      }
     }
-    return null;
   };
 
   return (
-    <div className="map-container">
-      <div className="tools">
+    <div className="w-full h-full flex mt-2 md:flex-col">
+      <div className="w-1/4 h-full md:w-full ">
         <MapFilters
           setEra={setEra}
           era={era}
@@ -133,10 +128,13 @@ const EventsMaps = () => {
           setData={setData}
           setMapId={setMapId}
         />
-        {showTools()}
+        {showAddWaypoint()}
+        {showDeleteWaypoints()}
         <p>{error}</p>
       </div>
-      <div className="map">{showMap()}</div>
+      <div className="w-3/4 flex items-center justify-center md:w-full md:h-96">
+        {showMap()}
+      </div>
     </div>
   );
 };

@@ -70,9 +70,12 @@ const GuessDateUpdate = ({ id }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className="w-2/5 border border-bor p-5 rounded-xl text-center mt-2">
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           value={title}
           onChange={(e) => {
@@ -80,8 +83,9 @@ const GuessDateUpdate = ({ id }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           value={day}
           onChange={(e) => {
@@ -89,8 +93,9 @@ const GuessDateUpdate = ({ id }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           value={month}
           onChange={(e) => {
@@ -98,8 +103,9 @@ const GuessDateUpdate = ({ id }) => {
           }}
         />
       </div>
-      <div>
+      <div className="div-input">
         <input
+          className="input"
           type="text"
           value={year}
           onChange={(e) => {
@@ -107,7 +113,7 @@ const GuessDateUpdate = ({ id }) => {
           }}
         />
       </div>
-      <button>{isUpdating ? "przetwarzanie... " : "zmodyfikuj"}</button>
+      <button className="btn">{isUpdating ? "przetwarzanie... " : "zmodyfikuj"}</button>
       <p>{validationStatus}</p>
       <p>{message}</p>
     </form>

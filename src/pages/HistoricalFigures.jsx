@@ -14,23 +14,23 @@ const HistoricalFigures = () => {
   //satates for content
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [error, setError] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (search.length === 0) {
       setLoading(true);
       axios
         .get(urlGetContentHistoricalFigures)
         .then((res) => {
           setData(res.data);
-          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
-        });
-    };
-
-    fetchData();
-  }, []);
+          setError("błąd");
+        })
+        .finally(setLoading(false));
+    }
+  }, [search]);
 
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -62,10 +62,14 @@ const HistoricalFigures = () => {
     return <Loading />;
   }
 
+  if (error) {
+    return <p className="text-center mt-3">{error}</p>;
+  }
+
   return (
     <>
-      <SearchBar onChange={handleSearch} onKeyPress={onKeyPress} />
-      <div className="historical-figures-content">
+      <SearchBar onChange={handleSearch} onKeyPress={onKeyPress} value={search} />
+      <div className="w-full h-full flex flex-wrap">
         {data.map((element) => {
           return <HistoricalFigureCard element={element} key={element.id} />;
         })}

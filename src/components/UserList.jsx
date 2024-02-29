@@ -37,8 +37,8 @@ const UserList = () => {
   }
 
   return (
-    <div className="userlist-div">
-      <img src={profilePic} alt="profilePic" className="profile-pic" />
+    <div className="flex items-center justify-center w-full h-full nav-li2">
+      <img src={profilePic} alt="profilePic" className="object-contain w-2/3 h-2/3" />
       <DropDownMenu elements={logged} />
     </div>
   );

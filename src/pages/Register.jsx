@@ -18,9 +18,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
-  //global hook to insert err
-  var errHook = document.getElementById("register-err");
+  const [message, setMessage] = useState();
 
   //redirect
   const navigate = useNavigate();
@@ -46,12 +44,12 @@ const Register = () => {
         throw Error("Coś poszło nie tak");
       }
     } catch (err) {
-      errHook.innerText = err;
+      setMessage(err);
     }
   };
 
   const Validation = () => {
-    errHook.innerText = "";
+    setMessage();
     let emailVal = false;
     let passwordVal = false;
     let nameVal = false;
@@ -60,30 +58,31 @@ const Register = () => {
     if (name.length > 0) {
       nameVal = true;
     } else {
-      errHook.innerText = "Pole nazwa nie może być puste";
+      setMessage("Pole nazwa nie może być puste");
     }
 
     if (surname.length > 0) {
       surnameVal = true;
     } else {
-      errHook.innerText = "Pole nazwisko nie może być puste";
+      setMessage("Pole nazwisko nie może być puste");
     }
 
     if (email.length > 0) {
       emailVal = true;
     } else {
-      errHook.innerText = "Pole email nie może być puste";
+      setMessage("Pole email nie może być puste");
     }
 
     if (password.length >= 8) {
       if (password === password2) {
         passwordVal = true;
       } else {
-        errHook.innerText = "Hasła są rożne";
+        setMessage("Hasła są rożne");
       }
     } else {
-      errHook.innerText =
-        "Hasło musi zawierać conajmniej 8 liera z czego conajmniej jedna litera musi być duża";
+      setMessage(
+        "Hasło musi zawierać conajmniej 8 liera z czego co najmniej jedna litera musi być duża"
+      );
     }
 
     if (nameVal && surnameVal && passwordVal && emailVal) {
@@ -96,7 +95,7 @@ const Register = () => {
     const validationStatus = Validation();
 
     if (validationStatus) {
-      errHook.innerText = "";
+      setMessage();
 
       const data = {
         name: name,
@@ -111,23 +110,20 @@ const Register = () => {
           navigate("/login");
         })
         .catch((err) => {
-          const { code, meta } = err.response.data;
-          if (code === "P2002") {
-            errHook.innerText = "użytkownika o takim emailu już istnieje";
-          } else {
-            errHook.innerText = `${code} <br> ${meta.target}`;
-          }
+          console.log(err);
+          setMessage("błąd");
         });
     }
   };
 
   return (
-    <div className="first-register-container">
-      <div className="login-container">
-        <h1>Utwórz konto</h1>
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="w-1/3 text-center border border-bor shadow-lg p-5 rounded-xl md:w-3/4">
+        <h1 className="font-bold text-2xl">Utwórz konto</h1>
         <form onSubmit={handleSubmit}>
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="text"
               placeholder="Imię"
               value={name}
@@ -137,8 +133,9 @@ const Register = () => {
             <FaUser />
           </div>
 
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="text"
               placeholder="Nazwisko"
               value={surname}
@@ -148,8 +145,9 @@ const Register = () => {
             <FaUser />
           </div>
 
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="email"
               placeholder="Email"
               value={email}
@@ -159,19 +157,21 @@ const Register = () => {
             <MdOutlineEmail />
           </div>
 
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="password"
               placeholder="Hasło"
               value={password}
               onChange={handleChange}
               name="password"
             />
-            <FaRegEye onClick={handleShowPassword} className="password" />
+            <FaRegEye onClick={handleShowPassword} className="cursor-pointer" />
           </div>
 
-          <div className="input-container">
+          <div className="div-input">
             <input
+              className="input"
               type="password"
               placeholder="Powtórz hasło"
               value={password2}
@@ -181,8 +181,10 @@ const Register = () => {
             <FaRegEye />
           </div>
 
-          <button className="login-register-btn">Stwórz konto</button>
-          <p id="register-err" className="err"></p>
+          <button className="btn m-2">Stwórz konto</button>
+          <div className="w-full flex justify-center p-2">
+            <p className="font-bold text-pretty w-2/3 ">{message}</p>
+          </div>
         </form>
       </div>
     </div>

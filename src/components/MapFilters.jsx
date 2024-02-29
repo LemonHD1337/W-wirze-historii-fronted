@@ -11,11 +11,12 @@ const MapFilters = ({
   setMapId,
 }) => {
   return (
-    <div className="filter-container">
+    <div className="text-center w-full">
       <p>Filtry</p>
       <EraSlider setEra={setEra} era={era} ages={ages} setData={setData} />
       <p>Mapy</p>
       <select
+        className="input m-2"
         onChange={(e) => {
           setMap(e.target.value);
           data.forEach((element) => {

@@ -4,20 +4,20 @@ import { games, all, maps } from "../config/contentConfig.js";
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul className="first-nav-list">
-        <li>
+    <nav className="w-full flex justify-end md:h-1/3">
+      <ul className="w-2/3 flex justify-around items-center md:w-full">
+        <li className="nav-li">
           Mapy <IoMdArrowDropdown />
           <DropDownMenu elements={maps} />
         </li>
 
-        <li>
+        <li className="nav-li">
           Gry
           <IoMdArrowDropdown />
           <DropDownMenu elements={games} />
         </li>
 
-        <li>
+        <li className="nav-li">
           Wpisy
           <IoMdArrowDropdown />
           <DropDownMenu elements={all} />

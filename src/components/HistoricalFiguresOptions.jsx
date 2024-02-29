@@ -28,7 +28,7 @@ const HistoricalFiguresOptions = () => {
   return (
     <>
       <AddHistoricalFigure />
-      <select onChange={(e) => setSelectedId(e.target.value)}>
+      <select onChange={(e) => setSelectedId(e.target.value)} className="input mt-2">
         <option value="0">wybierz wpis</option>
         {data.map((record) => {
           return (
@@ -38,7 +38,7 @@ const HistoricalFiguresOptions = () => {
           );
         })}
       </select>
-      <div>
+      <div className="mt-2 text-lg">
         <p>Aby zmodyfikować dane należy usunąć i dodać od nowa</p>
       </div>
       <DeleteHistoricalFigure id={selectedId} />
