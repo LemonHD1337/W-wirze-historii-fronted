@@ -6,8 +6,8 @@ const AddHistoricalFigure = () => {
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
   const [death, setDeath] = useState("");
-  const [pic, setPic] = useState(null);
-  const [doc, setDoc] = useState(null);
+  const [pic, setPic] = useState("");
+  const [doc, setDoc] = useState("");
 
   const refPic = useRef();
   const refDoc = useRef();
@@ -40,9 +40,9 @@ const AddHistoricalFigure = () => {
         },
       })
       .then((res) => {
-        setName(null);
-        setBirth(null);
-        setDeath(null);
+        setName("");
+        setBirth("");
+        setDeath("");
         refDoc.current.value = "";
         refPic.current.value = "";
         setMessage("dodano zawartość");
@@ -67,6 +67,7 @@ const AddHistoricalFigure = () => {
             onChange={handleChange}
             className="input"
             accept="image/*"
+            ref={refPic}
           />
         </label>
       </div>
@@ -77,6 +78,7 @@ const AddHistoricalFigure = () => {
           name="name"
           onChange={handleChange}
           className="input"
+          value={name}
         />
       </div>
       <div className="div-input">
@@ -86,6 +88,7 @@ const AddHistoricalFigure = () => {
           name="birth"
           onChange={handleChange}
           className="input"
+          value={birth}
         />
       </div>
       <div className="div-input">
@@ -95,6 +98,7 @@ const AddHistoricalFigure = () => {
           name="death"
           onChange={handleChange}
           className="input"
+          value={death}
         />
       </div>
 
@@ -110,6 +114,7 @@ const AddHistoricalFigure = () => {
             onChange={handleChange}
             className="input"
             accept=".doc, .docx"
+            ref={refDoc}
           />
         </label>
       </div>
