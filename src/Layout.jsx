@@ -46,7 +46,7 @@ const Layout = () => {
       <authContext.Provider value={{ user, setUser }}>
         <Router>
           <Header />
-          <main id="main" className="w-full h-5/6">
+          <main id="main" className="w-full flex-auto">
             <Routes>
               <Route path="/" exact Component={HomePage} />
               <Route path="/login" Component={Login} />

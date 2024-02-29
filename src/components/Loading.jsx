@@ -6,7 +6,7 @@ const Loading = () => {
       src={loadingSvg}
       alt="loading..."
       id="loading"
-      className="w-1/2 h-1/2 absolute"
+      className="w-1/2 h-1/2 relative"
     />
   );
 };
