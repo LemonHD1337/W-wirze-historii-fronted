@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { urlInsertContentHistoricalFigures } from "../services/api/endpoints";
+import { useRef, useState } from "react";
+import { URL_HF_CREATE } from "../services/api/endpoints";
 import axios from "axios";
 
 const AddHistoricalFigure = () => {
@@ -15,7 +15,7 @@ const AddHistoricalFigure = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, files } = e.target;
     if (name === "birth") setBirth(value);
     if (name === "death") setDeath(value);
@@ -24,7 +24,7 @@ const AddHistoricalFigure = () => {
     if (name === "doc") setDoc(files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const formdata = new FormData();
     formdata.append("name", name);
@@ -34,12 +34,12 @@ const AddHistoricalFigure = () => {
     formdata.append("doc", doc);
     setIsLoading(true);
     axios
-      .post(urlInsertContentHistoricalFigures, formdata, {
+      .post(URL_HF_CREATE, formdata, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => {
+      .then(res => {
         setName("");
         setBirth("");
         setDeath("");
@@ -47,7 +47,7 @@ const AddHistoricalFigure = () => {
         refPic.current.value = "";
         setMessage("dodano zawartość");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setMessage("błąd");
       })
@@ -55,7 +55,11 @@ const AddHistoricalFigure = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data" className="form">
+    <form
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+      className="form"
+    >
       <h1 className="font-bold text-2xl">Dodaj treść</h1>
       <div className="div-input">
         <label>
@@ -105,8 +109,8 @@ const AddHistoricalFigure = () => {
       <div className="div-input">
         <br />
         <label>
-          dodaj opis związany z tą osobą w dokumencie word. Proszę unikać dodawania zdjęć
-          w dokumencie.
+          dodaj opis związany z tą osobą w dokumencie word. Proszę unikać
+          dodawania zdjęć w dokumencie.
           <br />
           <input
             type="file"

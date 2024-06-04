@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { urlGetMapById, urlUpdateMapById } from "../services/api/endpoints";
+import { URL_MAP_GET, URL_MAP_UPDATE } from "../services/api/endpoints";
 
 const MapUpdate = ({ id }) => {
   const [title, setTitle] = useState("");
@@ -13,21 +13,22 @@ const MapUpdate = ({ id }) => {
     if (id !== 0) {
       setIsLoading(true);
       axios
-        .get(urlGetMapById + id)
-        .then((res) => {
+        .get(URL_MAP_GET + `/${id}`)
+        .then(res => {
           const { title, imageURL, source } = res.data;
           setTitle(title);
           setSource(source);
           setImageURL(imageURL);
         })
-        .catch((err) => {})
+        .catch(err => {})
         .finally(setIsLoading(false));
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const isValidated = source.length !== 0 && title.length !== 0 && imageURL !== 0;
+    const isValidated =
+      source.length !== 0 && title.length !== 0 && imageURL !== 0;
 
     if (id !== 0) {
       if (isValidated) {
@@ -38,11 +39,11 @@ const MapUpdate = ({ id }) => {
         };
         setIsLoading(true);
         axios
-          .put(urlUpdateMapById + id, data)
-          .then((res) => {
+          .put(URL_MAP_UPDATE + `/${id}`, data)
+          .then(res => {
             setMessage("zmodyfikowano mapę");
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err);
             setMessage("błąd");
           })
@@ -61,7 +62,7 @@ const MapUpdate = ({ id }) => {
           className="input"
           type="text"
           value={title}
-          onChange={(e) => {
+          onChange={e => {
             setTitle(e.target.value);
           }}
         />
@@ -70,7 +71,7 @@ const MapUpdate = ({ id }) => {
         <input
           type="text"
           value={source}
-          onChange={(e) => setSource(e.target.value)}
+          onChange={e => setSource(e.target.value)}
           className="input"
         />
       </div>
@@ -79,7 +80,7 @@ const MapUpdate = ({ id }) => {
           className="input"
           type="text"
           value={imageURL}
-          onChange={(e) => {
+          onChange={e => {
             setImageURL(e.target.value);
           }}
         />

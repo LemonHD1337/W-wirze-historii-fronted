@@ -1,10 +1,9 @@
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
-import authContext from "../store/authContext";
+import authContext from "../../store/authContext";
 import { useContext } from "react";
-import UserList from "./UserList";
-
-import logo from "../assets/logo.svg";
+import UserList from "../UserList";
+import logo from "../../assets/logo.svg";
 
 const Header = () => {
   const { user } = useContext(authContext);
@@ -18,15 +17,21 @@ const Header = () => {
       </div>
       <Navbar />
       <div className="w-60 flex justify-center items-center md:h-1/3 md:w-full md:items-center md:justify-center">
-        {user.authenticated ? (
-          <UserList />
-        ) : (
-          <button className="btn mr-5">
-            <Link to={"/login"}>Logowanie</Link>
-          </button>
-        )}
+        {conditionalView(user.authenticated)}
       </div>
     </header>
+  );
+};
+
+const conditionalView = authenticated => {
+  if (authenticated) {
+    return <UserList />;
+  }
+
+  return (
+    <button className="btn mr-5">
+      <Link to={"/login"}>Logowanie</Link>
+    </button>
   );
 };
 

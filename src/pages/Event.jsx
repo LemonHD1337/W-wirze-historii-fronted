@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Loading from "../components/Loading";
-import { baseURL, urlGetEvent } from "../services/api/endpoints";
+import Loading from "../components/shared/Loading";
+import BASE_URL from "../services/api/BASE_URL";
+import { URL_E_GET } from "../services/api/endpoints";
 import axios from "axios";
 import convertMonthToName from "../utils/convertMonthToName";
 
@@ -14,11 +15,11 @@ const Event = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(urlGetEvent + id)
-      .then((res) => {
+      .get(URL_E_GET + `/${id}`)
+      .then(res => {
         setData(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err);
       })
       .finally(setLoading(false));
@@ -42,21 +43,23 @@ const Event = () => {
         <h1 className="text-2xl font-bold">{data.title}</h1>
         <div>
           <img
-            src={baseURL + "/" + data.image}
+            src={BASE_URL + "/" + data.image}
             alt="zdjecie wydarzenia"
             className="w-full  object-contain aspect-auto"
           />
         </div>
         <div className="w-full mt-3 text-lg ">
           <p>
-            Data wydarzenia: {data.day} {convertMonthToName(data.month)} {data.year}
+            Data wydarzenia: {data.day} {convertMonthToName(data.month)}{" "}
+            {data.year}
           </p>
         </div>
       </div>
 
       <div
         className="w-3/4 h-full p-2 overflow-y-auto md:w-full ol ul h1 p"
-        dangerouslySetInnerHTML={{ __html: data.content }}></div>
+        dangerouslySetInnerHTML={{ __html: data.content }}
+      ></div>
     </div>
   );
 };

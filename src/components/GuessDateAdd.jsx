@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { urlInsertDataGuessDate } from "../services/api/endpoints";
-import Loading from "./Loading";
+import { URL_GUESSDATE_CREATE } from "../services/api/endpoints";
+import Loading from "./shared/Loading";
 
 const GuessDateAdd = () => {
   const [title, setTitle] = useState("");
@@ -11,7 +11,7 @@ const GuessDateAdd = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     if (e.target.name === "title") {
       setTitle(e.target.value);
     }
@@ -48,7 +48,7 @@ const GuessDateAdd = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const isValidated = validate();
 
@@ -62,15 +62,15 @@ const GuessDateAdd = () => {
 
       setIsLoading(true);
       axios
-        .post(urlInsertDataGuessDate, data)
-        .then((res) => {
+        .post(URL_GUESSDATE_CREATE, data)
+        .then(res => {
           setStatus("Dodano nową treść");
           setTitle("");
           setDay("");
           setMonth("");
           setYear("");
         })
-        .catch((error) => {
+        .catch(error => {
           setStatus("Coś poszło nie tak");
         })
         .finally(setIsLoading(false));
@@ -80,7 +80,8 @@ const GuessDateAdd = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-2/5 text-center border border-bor shadow rounded-xl p-5">
+      className="w-2/5 text-center border border-bor shadow rounded-xl p-5"
+    >
       <h1 className="text-2xl font-bold">Narzedzia</h1>
       <p>Miesiąc należy podać w formie liczbowej</p>
       <div className="div-input">
@@ -120,7 +121,9 @@ const GuessDateAdd = () => {
         />
       </div>
       <div>
-        <button className="btn">{isLoading ? <Loading /> : "Dodaj treść"}</button>
+        <button className="btn">
+          {isLoading ? <Loading /> : "Dodaj treść"}
+        </button>
       </div>
       <p>{status}</p>
     </form>

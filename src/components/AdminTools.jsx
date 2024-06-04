@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { urlInsertMap, urlDeleteMap, urlAddWaypoint } from "../services/api/endpoints";
-import Loading from "./Loading";
+import {
+  urlAddWaypoint,
+  urlDeleteMap,
+  urlInsertMap,
+} from "../services/api/endpoints";
+import Loading from "./shared/Loading";
 
 const AdminTools = ({ ages, map, lat, lng }) => {
   const [name, setName] = useState("");
@@ -17,7 +21,7 @@ const AdminTools = ({ ages, map, lat, lng }) => {
   const [succeed, setSucceed] = useState();
   const [error, setError] = useState();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const validated = await Validate();
 
@@ -32,11 +36,11 @@ const AdminTools = ({ ages, map, lat, lng }) => {
       setLoading(true);
       axios
         .post(urlInsertMap, data)
-        .then((res) => {
+        .then(res => {
           setLoading(false);
           setSucceed("dodano mapę");
         })
-        .catch((err) => {
+        .catch(err => {
           setLoading(false);
           console.log(err);
           setError("błąd");
@@ -46,7 +50,7 @@ const AdminTools = ({ ages, map, lat, lng }) => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, files } = e.target;
     if (name === "name") setName(value);
     if (name === "source") setSource(value);
@@ -79,15 +83,15 @@ const AdminTools = ({ ages, map, lat, lng }) => {
   const fetchData = async () => {
     axios
       .post(urlDeleteMap, { map: map })
-      .then((res) => {
+      .then(res => {
         console.log(res);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
 
-  const handleSubmitWaypoint = (e) => {
+  const handleSubmitWaypoint = e => {
     e.preventDefault();
 
     const formdata = new FormData();
@@ -105,11 +109,11 @@ const AdminTools = ({ ages, map, lat, lng }) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => {
+      .then(res => {
         setLoading(false);
         console.log(res);
       })
-      .catch((err) => {
+      .catch(err => {
         setLoading(false);
         console.log(err);
       });
@@ -174,8 +178,18 @@ const AdminTools = ({ ages, map, lat, lng }) => {
         <form encType="multipart/form-data" onSubmit={handleSubmitWaypoint}>
           <input type="text" value={lat} placeholder="lat" name="lat" />
           <input type="text" value={lng} placeholder="lng" name="lng" />
-          <input type="text" placeholder="nazwa" name="title" onChange={handleChange} />
-          <input type="text" placeholder="rok" name="year" onChange={handleChange} />
+          <input
+            type="text"
+            placeholder="nazwa"
+            name="title"
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="rok"
+            name="year"
+            onChange={handleChange}
+          />
           <label>
             Dodaj zdjęcie wydarzenia
             <input type="file" name="pic" onChange={handleChange} />

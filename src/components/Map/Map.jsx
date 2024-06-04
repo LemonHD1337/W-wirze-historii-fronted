@@ -1,44 +1,46 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import markerImg from "../assets/marker-icon.svg";
+import markerImg from "../../assets/marker-icon.svg";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const Map = ({ urlMap, source, setLat, setLng, waypoints }) => {
+const Map = ({ waypoints, urlMap, source, setLng, setLat }) => {
   useEffect(() => {
-    var map = L.map("map", {
+    let map = L.map("map", {
       crs: L.CRS.Simple,
     });
 
-    map.on("click", (e) => {
+    map.on("click", e => {
       const clickedLatitude = e.latlng.lat;
       const clickedLongitude = e.latlng.lng;
       setLat(clickedLatitude);
       setLng(clickedLongitude);
     });
 
-    var bounds = [
+    let bounds = [
       [0, 0],
       [1000, 1000],
     ];
 
+    if (!urlMap) urlMap = "";
     L.imageOverlay(urlMap, bounds).addTo(map);
     map.fitBounds(bounds);
 
-    var title = L.tileLayer("", {
+    let title = L.tileLayer("", {
       attribution: `<a href="${source}">Źródło</a>`,
     });
 
     map.addLayer(title);
 
-    if (waypoints.length !== 0) {
-      var myIcon = L.icon({
+    if (waypoints) {
+      let myIcon = L.icon({
         iconUrl: markerImg,
         iconSize: [32, 32],
       });
 
-      waypoints.forEach((element) => {
-        var marker = L.marker([element.latitude, element.longitude], { icon: myIcon });
+      waypoints.forEach(element => {
+        let marker = L.marker([element.latitude, element.longitude], {
+          icon: myIcon,
+        });
 
         const path = "/all/events/" + element.EventId.id;
 
@@ -50,7 +52,7 @@ const Map = ({ urlMap, source, setLat, setLng, waypoints }) => {
     return () => {
       map.remove();
     };
-  }, [urlMap, source, waypoints]);
+  }, [urlMap, source, waypoints, setLat, setLng]);
 
   return <div id="map"></div>;
 };

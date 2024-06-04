@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import {useContext} from "react";
 import authContext from "../store/authContext";
 
 import UserInfo from "../components/UserInfo";
@@ -7,6 +7,7 @@ import DeleteUser from "../components/DeleteUser";
 
 const UserSettings = () => {
   const { user } = useContext(authContext);
+
   return (
     <div className="w-full h-full flex flex-col items-center mt-2">
       <UserInfo id={user.userId} />

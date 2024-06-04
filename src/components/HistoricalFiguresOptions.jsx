@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
-import { urlGetContentHistoricalFigures } from "../services/api/endpoints";
+import { URL_HF_GETALL } from "../services/api/endpoints";
 
 import AddHistoricalFigure from "./AddHistoricalFigure";
 import DeleteHistoricalFigure from "./DeleteHistoricalFigure";
-import Loading from "./Loading";
+import Loading from "./shared/Loading";
 
 const HistoricalFiguresOptions = () => {
   const [data, setData] = useState();
@@ -15,9 +15,9 @@ const HistoricalFiguresOptions = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(urlGetContentHistoricalFigures)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err))
+      .get(URL_HF_GETALL)
+      .then(res => setData(res.data))
+      .catch(err => console.log(err))
       .finally(setIsLoading(false));
   }, []);
 
@@ -28,9 +28,12 @@ const HistoricalFiguresOptions = () => {
   return (
     <>
       <AddHistoricalFigure />
-      <select onChange={(e) => setSelectedId(e.target.value)} className="input mt-2">
+      <select
+        onChange={e => setSelectedId(e.target.value)}
+        className="input mt-2"
+      >
         <option value="0">wybierz wpis</option>
-        {data.map((record) => {
+        {data.map(record => {
           return (
             <option key={record.id} value={record.id}>
               {record.name}

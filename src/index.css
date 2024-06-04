@@ -7,15 +7,17 @@
 @layer base {
   html {
     font-family: 'Poppins', sans-serif;
+    position: relative;
+    min-height: 100%;
   }
 }
 
 body{
-  @apply w-screen h-screen max-w-full;
+  @apply w-screen h-screen max-w-full min-h-screen;
 }
 
 #root{
-  @apply flex flex-col min-h-screen h-1;
+  @apply flex flex-col min-h-full h-1;
 }
 
 .nav-li{
@@ -48,6 +50,10 @@ body{
 
 #map{
   @apply w-3/4 h-3/4;
+}
+
+.contentView{
+  @apply w-full h-full flex justify-center flex-wrap flex-grow gap-2 overflow-auto text-center;
 }
 
 .form{

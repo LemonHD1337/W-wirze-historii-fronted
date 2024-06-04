@@ -5,7 +5,7 @@ import MapUpdate from "./MapUpdate";
 import MapDelete from "./MapDelete";
 
 import axios from "axios";
-import { urlGetMap } from "../services/api/endpoints";
+import { URL_MAP_GET_ALL_BY_ERA } from "../services/api/endpoints";
 
 const MapOptions = () => {
   const [era, setEra] = useState(0);
@@ -26,11 +26,11 @@ const MapOptions = () => {
     if (era !== 0) {
       setIsLoading(true);
       axios
-        .post(urlGetMap, { era: era })
-        .then((res) => {
+        .post(URL_MAP_GET_ALL_BY_ERA + `/${era}`)
+        .then(res => {
           setData(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage(err);
         })
@@ -43,9 +43,10 @@ const MapOptions = () => {
       return (
         <select
           className="input my-2"
-          onChange={(e) => {
+          onChange={e => {
             setSelectedMap(e.target.value);
-          }}>
+          }}
+        >
           <option value="0">wybierz mapę</option>
           {data.map((map, index) => {
             return (
@@ -85,12 +86,13 @@ const MapOptions = () => {
       <div>
         <select
           className="input mt-2"
-          onChange={(e) => {
+          onChange={e => {
             const value = e.target.value;
             if (value !== 0) {
               setEra(value);
             }
-          }}>
+          }}
+        >
           <option value="0">Wybierz epokę</option>
           {ages.map((title, index) => {
             return (

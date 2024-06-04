@@ -1,5 +1,5 @@
 import profilePic from "../assets/Default_pfp.svg";
-import DropDownMenu from "./DropDownMenu";
+import DropDownMenu from "./shared/DropDownMenu";
 
 import { useContext } from "react";
 import authContext from "../store/authContext";

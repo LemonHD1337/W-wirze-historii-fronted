@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { urlDeleteHistoricalFigure } from "../services/api/endpoints";
+import { URL_HF_DELETE } from "../services/api/endpoints";
 
 const DeleteHistoricalFigure = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,11 +13,11 @@ const DeleteHistoricalFigure = ({ id }) => {
   const handleClick = () => {
     setIsLoading(true);
     axios
-      .post(urlDeleteHistoricalFigure, { id: id })
-      .then((res) => {
+      .get(URL_HF_DELETE + `/${id}`)
+      .then(res => {
         setMessage("usunięto wpis");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setMessage("błąd");
       })
@@ -27,7 +27,8 @@ const DeleteHistoricalFigure = ({ id }) => {
   return (
     <div className="form mt-2">
       <p className="text-lg">
-        Aby usunąć wpis należy wybrać u góry konkretny wpis i kliknąć przycisk poniżej
+        Aby usunąć wpis należy wybrać u góry konkretny wpis i kliknąć przycisk
+        poniżej
       </p>
       <button onClick={handleClick} className="btn mt-2">
         {isLoading ? "usuwanie..." : "usuń"}

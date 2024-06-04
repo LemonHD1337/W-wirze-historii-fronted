@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "./shared/Loading";
 
 import axios from "axios";
-import { urlGetUserInfo, urlChangeUserInfo } from "../services/api/endpoints";
+import {
+  URL_USER_GET,
+  URL_USER_UPDATE_DETAILS,
+} from "../services/api/endpoints";
 
 const UserInfo = ({ id }) => {
   const [name, setName] = useState();
@@ -16,13 +19,13 @@ const UserInfo = ({ id }) => {
     if (id !== null) {
       setIsLoading(true);
       axios
-        .post(urlGetUserInfo, { id: id })
-        .then((res) => {
+        .post(URL_USER_GET + `/${id}`)
+        .then(res => {
           setName(res.data.name);
           setSurname(res.data.surname);
           setEmail(res.data.email);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage("błąd");
         })
@@ -30,11 +33,10 @@ const UserInfo = ({ id }) => {
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     const data = {
-      id: id,
       name: name,
       surname: surname,
       email: email,
@@ -42,11 +44,11 @@ const UserInfo = ({ id }) => {
 
     setIsLoading(true);
     axios
-      .put(urlChangeUserInfo, data)
-      .then((res) => {
+      .put(URL_USER_UPDATE_DETAILS + `/${id}`, data)
+      .then(res => {
         setMessage("zmieniono danę");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setMessage("błąd");
       })
@@ -61,14 +63,15 @@ const UserInfo = ({ id }) => {
     <div className="w-1/5">
       <form
         onSubmit={handleSubmit}
-        className="shadow border border-bor p-5 text-center rounded-xl ">
+        className="shadow border border-bor p-5 text-center rounded-xl "
+      >
         <h1 className="font-bold text-2xl">Zmień dane</h1>
         <div className="div-input">
           <input
             className="input"
             type="text"
             value={name}
-            onChange={(e) => {
+            onChange={e => {
               setName(e.target.value);
             }}
           />
@@ -78,7 +81,7 @@ const UserInfo = ({ id }) => {
             className="input"
             type="text"
             value={surname}
-            onChange={(e) => {
+            onChange={e => {
               setSurname(e.target.value);
             }}
           />
@@ -88,7 +91,7 @@ const UserInfo = ({ id }) => {
             className="input"
             type="email"
             value={email}
-            onChange={(e) => {
+            onChange={e => {
               setEmail(e.target.value);
             }}
           />

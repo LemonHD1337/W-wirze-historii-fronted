@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import GuessDateOptions from "../components/GuessDateOptions";
 import HistoricalFiguresOptions from "../components/HistoricalFiguresOptions";
 import EventsOptions from "../components/EventsOptions";

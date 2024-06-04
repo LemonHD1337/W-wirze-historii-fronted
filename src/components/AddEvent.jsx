@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
-import { urlCreateEvent } from "../services/api/endpoints";
+import { URL_E_CREATE } from "../services/api/endpoints";
 
 const AddEvent = ({ era }) => {
   const [title, setTitle] = useState("");
@@ -16,7 +16,7 @@ const AddEvent = ({ era }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     const formdata = new FormData();
@@ -31,12 +31,12 @@ const AddEvent = ({ era }) => {
     setIsLoading(true);
 
     axios
-      .post(urlCreateEvent, formdata, {
+      .post(URL_E_CREATE, formdata, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => {
+      .then(res => {
         setMessage("dodano wpis");
         setTitle("");
         setDay("");
@@ -45,7 +45,7 @@ const AddEvent = ({ era }) => {
         refDoc.current.value = "";
         refPic.current.value = "";
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setMessage("błąd");
       })
@@ -55,7 +55,11 @@ const AddEvent = ({ era }) => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit} className="form mt-2">
+    <form
+      encType="multipart/form-data"
+      onSubmit={handleSubmit}
+      className="form mt-2"
+    >
       <h1 className="text-2xl font-bold">Dodaj wpis</h1>
       <div className="div-input">
         <input
@@ -63,7 +67,7 @@ const AddEvent = ({ era }) => {
           type="text"
           placeholder="Nazwa wydarzenia"
           value={title}
-          onChange={(e) => {
+          onChange={e => {
             setTitle(e.target.value);
           }}
         />
@@ -74,7 +78,7 @@ const AddEvent = ({ era }) => {
           type="text"
           placeholder="dzień wydarzenia"
           value={day}
-          onChange={(e) => {
+          onChange={e => {
             setDay(e.target.value);
           }}
         />
@@ -85,7 +89,7 @@ const AddEvent = ({ era }) => {
           type="text"
           placeholder="miesiąc wydarzenia"
           value={month}
-          onChange={(e) => {
+          onChange={e => {
             setMonth(e.target.value);
           }}
         />
@@ -96,7 +100,7 @@ const AddEvent = ({ era }) => {
           type="text"
           placeholder="rok wydarzenia"
           value={year}
-          onChange={(e) => {
+          onChange={e => {
             setYear(e.target.value);
           }}
         />
@@ -107,7 +111,7 @@ const AddEvent = ({ era }) => {
           <input
             className="input"
             type="file"
-            onChange={(e) => {
+            onChange={e => {
               setPic(e.target.files[0]);
             }}
             ref={refPic}
@@ -121,7 +125,7 @@ const AddEvent = ({ era }) => {
           <input
             className="input"
             type="file"
-            onChange={(e) => {
+            onChange={e => {
               setDoc(e.target.files[0]);
             }}
             accept=".doc, .docx"
@@ -129,7 +133,9 @@ const AddEvent = ({ era }) => {
           />
         </label>
       </div>
-      <button className="btn">{isLoading ? "przetwarzanie ..." : "dodaj wpis"}</button>
+      <button className="btn">
+        {isLoading ? "przetwarzanie ..." : "dodaj wpis"}
+      </button>
       <p>{message}</p>
     </form>
   );

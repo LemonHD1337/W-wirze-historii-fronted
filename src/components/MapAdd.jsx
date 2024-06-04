@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { urlCreateMap } from "../services/api/endpoints";
+import { URL_MAP_CREATE } from "../services/api/endpoints";
 
 const MapAdd = ({ era }) => {
   const [title, setTitle] = useState("");
@@ -9,10 +9,13 @@ const MapAdd = ({ era }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const isValidated =
-      title.length !== 0 && era !== 0 && source.length !== 0 && imageURL.length !== 0;
+      title.length !== 0 &&
+      era !== 0 &&
+      source.length !== 0 &&
+      imageURL.length !== 0;
     if (isValidated) {
       const data = {
         title: title,
@@ -23,14 +26,14 @@ const MapAdd = ({ era }) => {
 
       setIsLoading(true);
       axios
-        .post(urlCreateMap, data)
-        .then((res) => {
+        .post(URL_MAP_CREATE, data)
+        .then(res => {
           setMessage("dodano mapę");
           setTitle("");
           setSource("");
           setImageURL("");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage("błąd");
         })
@@ -48,7 +51,7 @@ const MapAdd = ({ era }) => {
           type="text"
           placeholder="nazwa mapy"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={e => setTitle(e.target.value)}
         />
       </div>
 
@@ -58,7 +61,7 @@ const MapAdd = ({ era }) => {
           type="text"
           placeholder="link do strony"
           value={source}
-          onChange={(e) => {
+          onChange={e => {
             setSource(e.target.value);
           }}
         />
@@ -69,12 +72,14 @@ const MapAdd = ({ era }) => {
           type="text"
           placeholder="link do mapy"
           value={imageURL}
-          onChange={(e) => {
+          onChange={e => {
             setImageURL(e.target.value);
           }}
         />
       </div>
-      <button className="btn">{isLoading ? "przetwarzanie..." : "dodaj mapę"}</button>
+      <button className="btn">
+        {isLoading ? "przetwarzanie..." : "dodaj mapę"}
+      </button>
       <p>{message}</p>
     </form>
   );

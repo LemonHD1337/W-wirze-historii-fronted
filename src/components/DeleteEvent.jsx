@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { urlGetEvents, urlDeleteEvent } from "../services/api/endpoints";
+import { URL_E_DELETE, URL_E_GET_ALL_BY_ERA } from "../services/api/endpoints";
 
 const DeleteEvent = ({ era }) => {
   const [data, setData] = useState([]);
@@ -11,11 +11,11 @@ const DeleteEvent = ({ era }) => {
   useEffect(() => {
     if (era) {
       axios
-        .post(urlGetEvents, { era: era })
-        .then((res) => {
+        .get(URL_E_GET_ALL_BY_ERA + `/${era}`)
+        .then(res => {
           setData(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage("błąd");
         })
@@ -23,16 +23,16 @@ const DeleteEvent = ({ era }) => {
     }
   }, [era]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     if (eventId !== 0) {
       axios
-        .delete(urlDeleteEvent + eventId)
-        .then((res) => {
+        .delete(URL_E_DELETE + `/${eventId}`)
+        .then(res => {
           setMessage("usunięto wpis");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage("błąd");
         })
@@ -42,9 +42,9 @@ const DeleteEvent = ({ era }) => {
 
   return (
     <form onSubmit={handleSubmit} className="form mt-2">
-      <select onChange={(e) => setEventId(e.target.value)} className="input">
+      <select onChange={e => setEventId(e.target.value)} className="input">
         <option value={0}>Wybierz wpis</option>
-        {data.map((element) => {
+        {data.map(element => {
           return (
             <option value={element.id} key={element.id}>
               {element.title}
@@ -53,7 +53,9 @@ const DeleteEvent = ({ era }) => {
         })}
       </select>
       <br />
-      <button className="btn mt-2">{isLoading ? "przetwarzanie..." : "Usuń wpis"}</button>
+      <button className="btn mt-2">
+        {isLoading ? "przetwarzanie..." : "Usuń wpis"}
+      </button>
       <p>{message}</p>
     </form>
   );

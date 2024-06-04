@@ -1,70 +1,41 @@
-import { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar";
-import Loading from "../components/Loading";
-import EventCard from "../components/EventCard";
-import axios from "axios";
-import { urlGetEventsByEra, urlSearchEvents } from "../services/api/endpoints";
+import SearchBar from "../components/shared/SearchBar";
+import MapDataRenderer from "../components/shared/MapDataRenderer";
+import { Pagination } from "@mui/material";
+import { useState } from "react";
+import usePagination from "../hooks/usePagination";
+import useFetchWithSearch from "../hooks/useFetchWithSearch";
+import { URL_E_GET_ALL, URL_E_SEARCH } from "../services/api/endpoints";
+import Loading from "../components/shared/Loading";
+import Warning from "../components/shared/Warning";
+import Error from "../components/shared/Error";
 
 const Events = () => {
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState();
+  const [searchEnabled, setSearchEnabled] = useState(false);
+  const { searchParams, handlePageChange } = usePagination(searchEnabled, 12);
+  const { data, isLoading, error, execute } = useFetchWithSearch(
+    URL_E_GET_ALL,
+    URL_E_SEARCH,
+    search,
+    searchParams,
+    setSearchEnabled,
+  );
 
-  useEffect(() => {
-    if (search.length === 0) {
-      setLoading(true);
-      axios
-        .get(urlGetEventsByEra)
-        .then((res) => {
-          setData(res.data);
-        })
-        .catch((error) => {
-          setError(error);
-        })
-        .finally(setLoading(false));
-    }
-  }, [search]);
-
-  const onKeyPress = (e) => {
-    if (e.key === "Enter") {
-      if (search.length !== 0) {
-        setLoading(true);
-        axios
-          .post(urlSearchEvents, { search: search })
-          .then((res) => {
-            setData(res.data);
-          })
-          .catch((error) => {
-            setError(error);
-            console.log(error);
-          })
-          .finally(setLoading(false));
-      }
-    }
-  };
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  if (loading || !data) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <p className="text-center mt-5">błąd</p>;
-  }
+  if (isLoading) return <Loading />;
+  if (!data) return <Warning message={"Brak danych"} />;
+  if (error) return <Error error={error} />;
 
   return (
-    <>
-      <SearchBar onKeyPress={onKeyPress} onChange={handleSearch} value={search} />
-      <div className="w-full h-full flex flex-wrap">
-        {data.map((element, index) => {
-          return <EventCard element={element} key={index} />;
-        })}
-      </div>
-    </>
+    <div className="contentView">
+      <SearchBar setSearch={setSearch} search={search} execute={execute} />
+      <MapDataRenderer data={data.paginateData} />
+      <Pagination
+        className="w-full p-5 flex justify-center relative"
+        count={data.totalPages}
+        defaultPage={parseInt(searchParams.get("currentPage"))}
+        onChange={handlePageChange}
+      />
+    </div>
   );
 };
 

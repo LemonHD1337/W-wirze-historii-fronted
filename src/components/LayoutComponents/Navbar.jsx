@@ -1,6 +1,6 @@
 import { IoMdArrowDropdown } from "react-icons/io";
-import DropDownMenu from "../components/DropDownMenu.jsx";
-import { games, all, maps } from "../config/contentConfig.js";
+import DropDownMenu from "../shared/DropDownMenu.jsx";
+import { all, games, maps } from "../../config/contentConfig.js";
 
 const Navbar = () => {
   return (

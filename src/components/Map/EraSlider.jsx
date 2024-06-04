@@ -1,15 +1,19 @@
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import ages from "../../utils/ages";
 
-const EraSlider = ({ setEra, era, ages, setData }) => {
+const EraSlider = ({ era, setEra, setWaypoints, setMapId, setMap }) => {
   const changeEra = (e, value) => {
-    setData(null);
     setEra(value);
+    setWaypoints(null);
+    setMapId(null);
+    setMap(null);
   };
 
   return (
-    <Box sx={{ width: "100%", marginLeft: "40px" }}>
+    <Box sx={{ width: "100%" }}>
       <Slider
+        sx={{ width: "80%" }}
         value={era}
         min={0}
         max={ages.length - 1}

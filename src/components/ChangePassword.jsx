@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { urlChangeUserPassword } from "../services/api/endpoints";
+import { URL_USER_UPDATE_PASSWORD } from "../services/api/endpoints";
 
 const ChangePassword = ({ id }) => {
   const [password, setPassword] = useState("");
@@ -8,18 +8,18 @@ const ChangePassword = ({ id }) => {
   const [message, setMessage] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const isValidated = await checkPasswords();
 
     if (isValidated && id !== null) {
       setIsLoading(true);
       axios
-        .put(urlChangeUserPassword, { id: id, password: password })
-        .then((res) => {
+        .put(URL_USER_UPDATE_PASSWORD + `/${id}`, { password: password })
+        .then(res => {
           setMessage("Pomyśle zmieniono hasło");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           setMessage("błąd");
         })
@@ -43,14 +43,15 @@ const ChangePassword = ({ id }) => {
     <div className="w-1/5 mt-2">
       <form
         onSubmit={handleSubmit}
-        className="text-center border border-bor rounded-xl shadow p-5">
+        className="text-center border border-bor rounded-xl shadow p-5"
+      >
         <h1 className="font-bold text-2xl">Zmień hasło</h1>
         <div className="div-input">
           <input
             className="input"
             type="password"
             value={password}
-            onChange={(e) => {
+            onChange={e => {
               setPassword(e.target.value);
             }}
           />
@@ -60,12 +61,14 @@ const ChangePassword = ({ id }) => {
             className="input"
             type="password"
             value={password2}
-            onChange={(e) => {
+            onChange={e => {
               setPassword2(e.target.value);
             }}
           />
         </div>
-        <button className="btn">{isLoading ? "przetwarzanie..." : "zmień hasło"}</button>
+        <button className="btn">
+          {isLoading ? "przetwarzanie..." : "zmień hasło"}
+        </button>
         <p>{message}</p>
       </form>
     </div>

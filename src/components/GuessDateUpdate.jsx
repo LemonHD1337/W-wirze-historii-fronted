@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  urlUpdateDataGuessDate,
-  urlGetRecordGuessDate,
+  URL_GUESSDATE_GET,
+  URL_GUESSDATE_UPDATE,
 } from "../services/api/endpoints.js";
 import axios from "axios";
 
@@ -19,22 +19,22 @@ const GuessDateUpdate = ({ id }) => {
     if (id && id !== 0) {
       setIsLoading(true);
       axios
-        .post(urlGetRecordGuessDate, { id: id })
-        .then((res) => {
+        .post(URL_GUESSDATE_GET + `${id}`)
+        .then(res => {
           const { title, day, month, year } = res.data;
           setDay(day);
           setTitle(title);
           setMonth(month);
           setYear(year);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         })
         .finally(setIsLoading(false));
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (
       day.length === 0 &&
@@ -54,11 +54,11 @@ const GuessDateUpdate = ({ id }) => {
     };
     setIsUpdating(true);
     axios
-      .post(urlUpdateDataGuessDate, data)
-      .then((res) => {
+      .post(URL_GUESSDATE_UPDATE + `/${id}`, data)
+      .then(res => {
         setMessage("zmodyfikowano dane");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setMessage("błąd");
       })
@@ -72,13 +72,14 @@ const GuessDateUpdate = ({ id }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-2/5 border border-bor p-5 rounded-xl text-center mt-2">
+      className="w-2/5 border border-bor p-5 rounded-xl text-center mt-2"
+    >
       <div className="div-input">
         <input
           className="input"
           type="text"
           value={title}
-          onChange={(e) => {
+          onChange={e => {
             setTitle(e.target.value);
           }}
         />
@@ -88,7 +89,7 @@ const GuessDateUpdate = ({ id }) => {
           className="input"
           type="text"
           value={day}
-          onChange={(e) => {
+          onChange={e => {
             setDay(e.target.value);
           }}
         />
@@ -98,7 +99,7 @@ const GuessDateUpdate = ({ id }) => {
           className="input"
           type="text"
           value={month}
-          onChange={(e) => {
+          onChange={e => {
             setMonth(e.target.value);
           }}
         />
@@ -108,12 +109,14 @@ const GuessDateUpdate = ({ id }) => {
           className="input"
           type="text"
           value={year}
-          onChange={(e) => {
+          onChange={e => {
             setYear(e.target.year);
           }}
         />
       </div>
-      <button className="btn">{isUpdating ? "przetwarzanie... " : "zmodyfikuj"}</button>
+      <button className="btn">
+        {isUpdating ? "przetwarzanie... " : "zmodyfikuj"}
+      </button>
       <p>{validationStatus}</p>
       <p>{message}</p>
     </form>

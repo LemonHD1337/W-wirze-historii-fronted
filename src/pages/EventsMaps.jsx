@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import authContext from "../store/authContext";
+import { useState } from "react";
 
-import { urlGetMap, urlGetEventsByEra, urlGetWaypoints } from "../services/api/endpoints";
-import axios from "axios";
-
-import Map from "../components/Map";
-import MapFilters from "../components/MapFilters";
-import Loading from "../components/Loading";
-import AddWaypoint from "../components/AddWaypoint";
-import DeleteWaypoint from "../components/DeleteWaypoint";
+import Map from "../components/Map/Map";
+import Loading from "../components/shared/Loading";
+import useMapPage from "../hooks/useMapPage";
+import Warning from "../components/shared/Warning";
+import Error from "../components/shared/Error";
+import EraSlider from "../components/Map/EraSlider";
+import MapSelect from "../components/Map/MapSelect";
+import AddWaypoint from "../components/Map/AddWaypoint";
+import DeleteWaypoint from "../components/Map/DeleteWaypoint";
 
 const EventsMaps = () => {
   const [era, setEra] = useState(0);
@@ -18,122 +18,57 @@ const EventsMaps = () => {
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
 
-  //context
-  const { user } = useContext(authContext);
+  const {
+    isLoading,
+    eventsList,
+    mapsList,
+    waypointsList,
+    error,
+    setWaypointsList,
+  } = useMapPage(era, mapId);
 
-  //fetch
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const [waypoints, setWaypoints] = useState([]);
-  const [eventsList, setEventsList] = useState([]);
-  const [error, setError] = useState();
+  if (isLoading) return <Loading />;
+  if (!mapsList) return <Warning message={"Brak map"} />;
+  if (error) return <Error />;
 
-  const ages = [
-    "Prehistoria",
-    "Starożytność",
-    "Średniowiecze",
-    "Nowożytność",
-    "Współczesność",
-  ];
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post(urlGetMap, { era: ages[era] })
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError("błąd");
-      })
-      .finally(setIsLoading(false));
-
-    setIsLoading(true);
-    axios
-      .post(urlGetEventsByEra, { era: ages[era] })
-      .then((res) => {
-        setEventsList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError("błąd");
-      })
-      .finally(setIsLoading(false));
-
-    if (mapId) {
-      setIsLoading(true);
-      axios
-        .get(urlGetWaypoints + mapId)
-        .then((res) => {
-          setWaypoints(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-          setError("błąd");
-        })
-        .finally(setIsLoading(false));
-    }
-  }, [era, mapId]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!data) {
-    return <Loading />;
-  }
-
-  const showMap = () => {
-    if (map.length === 0 || map === "Wybierz mape") {
-      return <Loading />;
-    }
-    return (
-      <Map
-        urlMap={map}
-        source={source}
-        setLat={setLat}
-        setLng={setLng}
-        waypoints={waypoints}
-      />
-    );
-  };
-
-  const showAddWaypoint = () => {
-    if (user.role === "admin" || user.role === "creator") {
-      if (eventsList.length !== 0 && mapId) {
-        return <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />;
+  const onMapSelect = e => {
+    setMap(e.target.value);
+    mapsList.forEach(element => {
+      if (e.target.value === element.imageURL) {
+        setMapId(element.id);
+        setSource(element.source);
       }
-    }
-  };
-
-  const showDeleteWaypoints = () => {
-    if (user.role === "admin" || user.role === "creator") {
-      if (waypoints.length !== 0) {
-        return <DeleteWaypoint waypoints={waypoints} />;
-      }
-    }
+    });
   };
 
   return (
     <div className="w-full h-full flex mt-2 md:flex-col">
-      <div className="w-1/4 h-full md:w-full ">
-        <MapFilters
+      <div className="text-center w-1/3 overflow-auto overflow-x-hidden">
+        <h1>Filtry</h1>
+        <EraSlider
           setEra={setEra}
           era={era}
-          ages={ages}
-          setMap={setMap}
-          data={data}
-          setSource={setSource}
-          setData={setData}
+          setWaypoints={setWaypointsList}
           setMapId={setMapId}
+          setMap={setMap}
         />
-        {showAddWaypoint()}
-        {showDeleteWaypoints()}
-        <p>{error}</p>
+        <MapSelect
+          data={mapsList}
+          defaultValue={"wybierz mapę"}
+          onChange={onMapSelect}
+          map={map}
+        />
+        <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />
+        <DeleteWaypoint waypoints={waypointsList} />
       </div>
       <div className="w-3/4 flex items-center justify-center md:w-full md:h-96">
-        {showMap()}
+        <Map
+          urlMap={map}
+          source={source}
+          setLat={setLat}
+          setLng={setLng}
+          waypoints={waypointsList}
+        />
       </div>
     </div>
   );
