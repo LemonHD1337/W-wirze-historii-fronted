@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import authContext from "../../store/authContext";
 import { useContext } from "react";
-import UserList from "../UserList";
+import UserList from "../Settings/UserList";
 import logo from "../../assets/logo.svg";
 
 const Header = () => {

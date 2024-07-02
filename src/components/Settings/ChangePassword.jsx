@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { URL_USER_UPDATE_PASSWORD } from "../services/api/endpoints";
+import { URL_USER_UPDATE_PASSWORD } from "../../services/api/endpoints";
 
 const ChangePassword = ({ id }) => {
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ const ChangePassword = ({ id }) => {
           console.log(err);
           setMessage("błąd");
         })
-        .finally(setIsLoading(false));
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -40,16 +40,17 @@ const ChangePassword = ({ id }) => {
   };
 
   return (
-    <div className="w-1/5 mt-2">
+    <div className="w-full flex justify-center m-3">
       <form
         onSubmit={handleSubmit}
-        className="text-center border border-bor rounded-xl shadow p-5"
+        className="text-center border border-bor rounded-xl shadow p-5 w-1/5"
       >
         <h1 className="font-bold text-2xl">Zmień hasło</h1>
         <div className="div-input">
           <input
             className="input"
             type="password"
+            placeholder={"wpisz hasło"}
             value={password}
             onChange={e => {
               setPassword(e.target.value);
@@ -60,13 +61,14 @@ const ChangePassword = ({ id }) => {
           <input
             className="input"
             type="password"
+            placeholder={"powtórz hasło"}
             value={password2}
             onChange={e => {
               setPassword2(e.target.value);
             }}
           />
         </div>
-        <button className="btn">
+        <button className="btn m-2">
           {isLoading ? "przetwarzanie..." : "zmień hasło"}
         </button>
         <p>{message}</p>

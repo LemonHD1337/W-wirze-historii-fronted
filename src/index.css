@@ -57,45 +57,22 @@ body{
 }
 
 .form{
-  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5
+  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5 mt-2
 }
 
-.ul ul{
-  display: block;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
+.addContent-select{
+  @apply input m-5 w-2/5
 }
 
-.ol ol{
+.addContent-div{
+  @apply overflow-auto w-full flex flex-col items-center p-5 text-center
 
-    display: block;
-    list-style-type: decimal;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-  
 }
 
-.h1 h1{
-  display: block;
-  font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
+.addContent-p{
+ @apply p-2 text-lg
 }
 
-.p p{
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+.addContent-h1{
+  @apply text-2xl font-bold p-4
 }

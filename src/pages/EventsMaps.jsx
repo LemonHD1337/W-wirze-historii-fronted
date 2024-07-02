@@ -42,8 +42,8 @@ const EventsMaps = () => {
   };
 
   return (
-    <div className="w-full h-full flex mt-2 md:flex-col">
-      <div className="text-center w-1/3 overflow-auto overflow-x-hidden">
+    <div className="w-full min-h-full flex mt-2 lap:flex-col overflow-auto">
+      <div className="text-center w-3/5 overflow-auto overflow-x-hidden lapL:w-3/4 lap:w-full lap:h-fit">
         <h1>Filtry</h1>
         <EraSlider
           setEra={setEra}
@@ -61,7 +61,7 @@ const EventsMaps = () => {
         <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />
         <DeleteWaypoint waypoints={waypointsList} />
       </div>
-      <div className="w-3/4 flex items-center justify-center md:w-full md:h-96">
+      <div className="w-full flex items-center justify-center lap:w-full lap:">
         <Map
           urlMap={map}
           source={source}

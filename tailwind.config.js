@@ -13,6 +13,8 @@ module.exports = {
       },
       screens: {
         md: { max: "767px" },
+        lapL: { max: "1440px" },
+        lap: { max: "1024px" },
       },
     },
   },

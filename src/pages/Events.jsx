@@ -28,7 +28,7 @@ const Events = () => {
   return (
     <div className="contentView">
       <SearchBar setSearch={setSearch} search={search} execute={execute} />
-      <MapDataRenderer data={data.paginateData} />
+      <MapDataRenderer data={data.paginateData} type={"event"} />
       <Pagination
         className="w-full p-5 flex justify-center relative"
         count={data.totalPages}

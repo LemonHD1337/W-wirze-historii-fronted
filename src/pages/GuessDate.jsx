@@ -1,4 +1,4 @@
-import GuessDateGame from "../components/GuessDateGame";
+import GuessDateGame from "../components/Content/GuessDate/GuessDateGame";
 
 const GuessDate = () => {
   return (

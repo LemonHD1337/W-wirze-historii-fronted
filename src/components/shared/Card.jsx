@@ -11,9 +11,9 @@ const Card = ({ data, type }) => {
   }
 
   return (
-    <div className="w-64 h-80 border border-bor rounded-xl flex flex-col items-center shadow-lg ">
+    <div className="w-64 h-80 border border-bor rounded-xl flex flex-col items-center shadow-lg p-2">
       <img
-        src={BASE_URL + "/" + data.image}
+        src={BASE_URL + "/static/" + data.image}
         alt={alt}
         className="w-5/6 object-contain h-2/3 mt-2"
       />

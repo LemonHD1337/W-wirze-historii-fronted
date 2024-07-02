@@ -5,8 +5,7 @@ function getDataFromCookie() {
     const IndexOpenTag = cookie.indexOf("{");
     const IndexCloseTag = cookie.indexOf("}") + 2;
     cookie = cookie.substring(IndexOpenTag, IndexCloseTag);
-    const result = JSON.parse(cookie);
-    return result;
+    return JSON.parse(cookie);
   } else {
     return undefined;
   }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { URL_USER_DELETE } from "../services/api/endpoints";
+import { URL_USER_DELETE } from "../../services/api/endpoints";
 import { useNavigate } from "react-router-dom";
 
 const DeleteUser = ({ id }) => {
@@ -35,7 +35,7 @@ const DeleteUser = ({ id }) => {
         className="text-center border-bor border rounded-xl shadow p-5"
       >
         <h1 className="text-2xl font-bold">Usuń konto</h1>
-        <button className="btn">
+        <button className="btn m-2">
           {isLoading ? "usuwanie..." : "Usuń konto"}
         </button>
         <p>{message}</p>

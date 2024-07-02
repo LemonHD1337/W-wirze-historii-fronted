@@ -1,18 +1,23 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../../pages/HomePage";
-import Login from "../../pages/Login";
-import Register from "../../pages/Register";
-import EventsMaps from "../../pages/EventsMaps";
-import GuessDate from "../../pages/GuessDate";
-import Events from "../../pages/Events";
-import Event from "../../pages/Event";
-import HistoricalFigures from "../../pages/HistoricalFigures";
-import HistoricalFigure from "../../pages/HistoricalFigure";
-import UserSettings from "../../pages/UserSettings";
-import AddContent from "../../pages/AddContent";
-import Logout from "../../pages/Logout";
-import Contact from "../../pages/Contact";
-import Authors from "../../pages/Authors";
+import Loading from "../shared/Loading";
+const HomePage = lazy(() => import("../../pages/HomePage"));
+const Login = lazy(() => import("../../pages/Login"));
+const Register = lazy(() => import("../../pages/Register"));
+const EventsMaps = lazy(() => import("../../pages/EventsMaps"));
+const GuessDate = lazy(() => import("../../pages/GuessDate"));
+const Events = lazy(() => import("../../pages/Events"));
+const Event = lazy(() => import("../../pages/Event"));
+const HistoricalFigures = lazy(() => import("../../pages/HistoricalFigures"));
+const HistoricalFigure = lazy(() => import("../../pages/HistoricalFigure"));
+const UserSettings = lazy(() => import("../../pages/UserSettings"));
+const AddContent = lazy(() => import("../../pages/AddContent"));
+const Logout = lazy(() => import("../../pages/Logout"));
+const Contact = lazy(() => import("../../pages/Contact"));
+const Authors = lazy(() => import("../../pages/Authors"));
+const PasswordReset = lazy(() => import("../../pages/PasswordReset"));
+const VerifyCode = lazy(() => import("../../pages/VerifyCode"));
+const CreateNewPassword = lazy(() => import("../../pages/CreateNewPassword"));
 
 const Main = () => {
   return (
@@ -20,22 +25,36 @@ const Main = () => {
       id="main"
       className="w-full flex flex-col h-full relative overflow-hidden"
     >
-      <Routes>
-        <Route path="/" exact Component={HomePage} />
-        <Route path="/login" Component={Login} />
-        <Route path="/register" Component={Register} />
-        <Route path="/eventsMaps" Component={EventsMaps} />
-        <Route path="/games/guessDate" Component={GuessDate} />
-        <Route path="/all/events" Component={Events} />
-        <Route path="/all/events/:id" Component={Event} />
-        <Route path="/all/historicalFigures" Component={HistoricalFigures} />
-        <Route path="/all/historicalFigures/:id" Component={HistoricalFigure} />
-        <Route path="/user/settings" Component={UserSettings} />
-        <Route path="/user/addContent" Component={AddContent} />
-        <Route path="/user/logout" Component={Logout} />
-        <Route path="/contact" Component={Contact} />
-        <Route path="/authors" Component={Authors} />
-      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/eventsMaps" element={<EventsMaps />} />
+          <Route path="/games/guessDate" element={<GuessDate />} />
+          <Route path="/all/events" element={<Events />} />
+          <Route path="/all/events/:id" element={<Event />} />
+          <Route
+            path="/all/historicalFigures"
+            element={<HistoricalFigures />}
+          />
+          <Route
+            path="/all/historicalFigures/:id"
+            element={<HistoricalFigure />}
+          />
+          <Route path="/user/settings" element={<UserSettings />} />
+          <Route path="/user/addContent" element={<AddContent />} />
+          <Route path="/user/logout" element={<Logout />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/authors" element={<Authors />} />
+          <Route path={"/password/reset"} element={<PasswordReset />} />
+          <Route path={"/password/reset/verify/:id"} element={<VerifyCode />} />
+          <Route
+            path={"/password/reset/verified/:id"}
+            element={<CreateNewPassword />}
+          />
+        </Routes>
+      </Suspense>
     </main>
   );
 };

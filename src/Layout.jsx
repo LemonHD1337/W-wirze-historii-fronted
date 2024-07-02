@@ -11,6 +11,7 @@ const Layout = () => {
 
   useEffect(() => {
     const data = getDataFromCookie();
+
     if (data !== undefined) {
       setUser({
         authenticated: true,
@@ -18,6 +19,8 @@ const Layout = () => {
         role: data.role.role,
       });
     }
+
+
   }, []);
 
   return (

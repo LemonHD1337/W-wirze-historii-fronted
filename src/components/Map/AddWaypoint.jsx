@@ -14,7 +14,8 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
   const { user } = useContext(authContext);
 
   if (!eventsList || !id) return null;
-  if (user.role === "user") return null;
+  if (!user.authenticated) return null;
+  if (user.role === "user" || !user.role) return null;
   if (isLoading) return <Loading />;
   if (error) return <Error error={error} />;
 

@@ -6,7 +6,7 @@ import MapDataRenderer from "../components/shared/MapDataRenderer";
 import Loading from "../components/shared/Loading";
 import Warning from "../components/shared/Warning";
 import Error from "../components/shared/Error";
-import { URL_HF_GETALL, URL_HF_SEARCH } from "../services/api/endpoints";
+import { URL_HF_PAGINATED, URL_HF_SEARCH } from "../services/api/endpoints";
 import { Pagination } from "@mui/material";
 
 const HistoricalFigures = () => {
@@ -14,7 +14,7 @@ const HistoricalFigures = () => {
   const [searchEnabled, setSearchEnabled] = useState(false);
   const { searchParams, handlePageChange } = usePagination(searchEnabled, 12);
   const { data, isLoading, error, execute } = useFetchWithSearch(
-    URL_HF_GETALL,
+    URL_HF_PAGINATED,
     URL_HF_SEARCH,
     search,
     searchParams,

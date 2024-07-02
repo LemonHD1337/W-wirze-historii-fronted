@@ -1,9 +1,9 @@
-import useFetch from "../hooks/useFetch";
-import { URL_GUESSDATE_GET_RANDOM } from "../services/api/endpoints";
-import Warning from "./shared/Warning";
-import Loading from "./shared/Loading";
-import Error from "./shared/Error";
-import useGuessDateLogic from "../hooks/useGuessDateLogic";
+import useFetch from "../../../hooks/useFetch";
+import { URL_GUESSDATE_GET_RANDOM } from "../../../services/api/endpoints";
+import Warning from "../../shared/Warning";
+import Loading from "../../shared/Loading";
+import Error from "../../shared/Error";
+import useGuessDateLogic from "../../../hooks/useGuessDateLogic";
 import { useState } from "react";
 
 const GuessDateGame = () => {

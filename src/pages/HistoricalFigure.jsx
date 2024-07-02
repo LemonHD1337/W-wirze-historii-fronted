@@ -16,24 +16,11 @@ const HistoricalFiguresInfo = () => {
 
   return (
     <div className="w-full h-full flex md:flex-col">
-      <div className="w-1/4 p-2 text-center md:w-full">
-        <h1 className="font-bold text-2xl">{data.name}</h1>
-        <div className="h-2/3">
-          <img
-            src={BASE_URL + "/" + data.image}
-            alt="zdjęcie postaci"
-            className="w-full max-h-full object-contain aspect-auto"
-          />
-        </div>
-        <div className="w-full text-pretty mt-3 text-lg">
-          <p>miesjce urodzenia: {data.birth}</p>
-          <p>miesjce śmierci: {data.death}</p>
-        </div>
-      </div>
-      <div
-        className="w-3/4 p-2 overflow-y-auto md:w-full ol ul h1 p"
-        dangerouslySetInnerHTML={{ __html: data.text }}
-      ></div>
+      <embed
+        src={BASE_URL + "/static/" + data.document + "#toolbar=0"}
+        width="100%"
+        height="100%"
+      />
     </div>
   );
 };

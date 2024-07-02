@@ -1,15 +1,14 @@
-import profilePic from "../assets/Default_pfp.svg";
-import DropDownMenu from "./shared/DropDownMenu";
+import profilePic from "../../assets/Default_pfp.svg";
+import DropDownMenu from "../shared/DropDownMenu";
 
 import { useContext } from "react";
-import authContext from "../store/authContext";
+import authContext from "../../store/authContext";
 
 const UserList = () => {
   const { user } = useContext(authContext);
-  var logged = 0;
 
   if (user.role === "admin" || user.role === "creator") {
-    logged = [
+    var logged = [
       {
         title: "ustawienia",
         route: "/user/settings",
@@ -24,7 +23,7 @@ const UserList = () => {
       },
     ];
   } else {
-    logged = [
+    var logged = [
       {
         title: "ustawienia",
         route: "/user/settings",
