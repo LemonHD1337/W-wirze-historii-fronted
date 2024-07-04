@@ -61,11 +61,13 @@ const useLoginLogic = () => {
         withCredentials: true,
       });
 
-      const { auth, userId, role } = res.data;
+      const { auth, userId, role, accessToken, remember } = res.data;
       setUser({
         authenticated: auth,
         userId: userId,
         role: role.role,
+        accessToken: accessToken,
+        remember: remember,
       });
 
       navigate("/");

@@ -23,6 +23,7 @@ export const URL_USER_UPDATE_DETAILS = BASE_URL + "/users/update";
 export const URL_USER_UPDATE_PASSWORD = BASE_URL + "/users/update/password";
 export const URL_USER_CHECK_EMAIL = BASE_URL + "/users/check/e-mail";
 export const URL_USER_CHECK_CODE = BASE_URL + "/users/check/code";
+export const URL_USER_REFRESH_TOKEN = BASE_URL + "/users/refresh/token";
 
 export const URL_GUESSDATE_CREATE = BASE_URL + "/guessDate/create";
 export const URL_GUESSDATE_UPDATE = BASE_URL + "/guessDate/update";

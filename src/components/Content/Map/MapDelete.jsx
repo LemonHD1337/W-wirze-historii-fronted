@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { URL_MAP_DELETE } from "../../../services/api/endpoints";
 import axios from "axios";
+import authContext from "../../../store/authContext";
 
 const MapDelete = ({ id }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [status, setStatus] = useState("");
+  const { user } = useContext(authContext);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -12,7 +14,12 @@ const MapDelete = ({ id }) => {
 
     try {
       setIsDeleting(true);
-      await axios.delete(URL_MAP_DELETE + `/${id}`);
+      await axios.delete(URL_MAP_DELETE + `/${id}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("Usunięto mapę!");
     } catch (e) {
       console.log(e);

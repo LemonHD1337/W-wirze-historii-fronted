@@ -2,10 +2,9 @@ import useDeleteWaypointLogic from "../../hooks/useDeleteWaypointLogic";
 import { useContext } from "react";
 import authContext from "../../store/authContext";
 import Loading from "../shared/Loading";
-import Error from "../shared/Error";
 
 const DeleteWaypoint = ({ waypoints }) => {
-  const { error, isLoading, handleChange, handleSubmit } =
+  const { status, isLoading, handleChange, handleSubmit } =
     useDeleteWaypointLogic();
 
   const { user } = useContext(authContext);
@@ -14,7 +13,6 @@ const DeleteWaypoint = ({ waypoints }) => {
   if (!user.authenticated) return null;
   if (user.role === "user" || !user.role) return null;
   if (isLoading) return <Loading />;
-  if (error) return <Error error={error} />;
 
   return (
     <form
@@ -43,6 +41,7 @@ const DeleteWaypoint = ({ waypoints }) => {
       <button className="btn mt-2">
         {isLoading ? "usuwanie..." : "Usuń zaznacznik"}
       </button>
+      <p className={"p-2"}>{status}</p>
     </form>
   );
 };

@@ -14,6 +14,7 @@ module.exports = {
       screens: {
         md: { max: "768px" },
         mobileS: { max: "320px" },
+        mobileM: { max: "375px" },
         mobileL: { max: "425px" },
         lapL: { max: "1440px" },
         lap: { max: "1024px" },

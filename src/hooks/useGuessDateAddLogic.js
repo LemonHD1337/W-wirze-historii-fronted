@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { URL_GUESSDATE_CREATE } from "../services/api/endpoints";
+import authContext from "../store/authContext";
 
 const useGuessDateAddLogic = () => {
   const [title, setTitle] = useState("");
@@ -9,6 +10,7 @@ const useGuessDateAddLogic = () => {
   const [year, setYear] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
   const [status, setStatus] = useState(null);
+  const { user } = useContext(authContext);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -53,7 +55,12 @@ const useGuessDateAddLogic = () => {
 
     try {
       setIsUpdating(true);
-      await axios.post(URL_GUESSDATE_CREATE, data);
+      await axios.post(URL_GUESSDATE_CREATE, data, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("Dodano nową treść");
       setTitle("");
       setDay("");

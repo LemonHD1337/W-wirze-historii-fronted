@@ -1,11 +1,10 @@
 import useAddWayLogic from "../../hooks/useAddWayLogic";
 import Loading from "../shared/Loading";
-import Error from "../shared/Error";
 import { useContext } from "react";
 import authContext from "../../store/authContext";
 
 const AddWaypoint = ({ eventsList, lat, lng, id }) => {
-  const { error, isLoading, handleSubmit, handleChange } = useAddWayLogic(
+  const { status, isLoading, handleSubmit, handleChange } = useAddWayLogic(
     lat,
     lng,
     id,
@@ -17,7 +16,6 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
   if (!user.authenticated) return null;
   if (user.role === "user" || !user.role) return null;
   if (isLoading) return <Loading />;
-  if (error) return <Error error={error} />;
 
   return (
     <form
@@ -61,6 +59,7 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
       <button className="btn">
         {isLoading ? "przetwarzanie..." : "Dodaj zaznacznik"}
       </button>
+      <p className={"p-2"}>{status}</p>
     </form>
   );
 };

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { URL_E_DELETE } from "../../../services/api/endpoints";
+import authContext from "../../../store/authContext";
 
 const DeleteEvent = ({ eventId }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [status, setStatus] = useState("");
+  const { user } = useContext(authContext);
 
   if (!eventId) return null;
 
@@ -14,7 +16,12 @@ const DeleteEvent = ({ eventId }) => {
     if (eventId === 0) return;
     try {
       setIsDeleting(true);
-      await axios.delete(URL_E_DELETE + `/${eventId}`);
+      await axios.delete(URL_E_DELETE + `/${eventId}`, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("usunięto wpis");
     } catch (e) {
       console.log(e);

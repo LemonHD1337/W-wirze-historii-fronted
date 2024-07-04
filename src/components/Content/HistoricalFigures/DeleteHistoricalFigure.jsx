@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { URL_HF_DELETE } from "../../../services/api/endpoints";
+import authContext from "../../../store/authContext";
 
 const DeleteHistoricalFigure = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const { user } = useContext(authContext);
 
   if (!id) {
     return null;
@@ -13,7 +15,12 @@ const DeleteHistoricalFigure = ({ id }) => {
   const handleClick = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(URL_HF_DELETE + `/${id}`);
+      await axios.delete(URL_HF_DELETE + `/${id}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("usunięto wpis!");
       setTimeout(() => {
         setStatus("");

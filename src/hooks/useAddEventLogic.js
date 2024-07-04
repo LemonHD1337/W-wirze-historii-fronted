@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { URL_E_CREATE } from "../services/api/endpoints";
+import AuthContext from "../store/authContext";
 
 const useAddEventLogic = era => {
   const [title, setTitle] = useState("");
   const [pic, setPic] = useState("");
   const [doc, setDoc] = useState("");
+  const { user } = useContext(AuthContext);
 
   const refPic = useRef();
   const refDoc = useRef();
@@ -26,8 +28,10 @@ const useAddEventLogic = era => {
       setIsLoading(true);
       await axios.post(URL_E_CREATE, formdata, {
         headers: {
+          authorization: `Bearer ${user.accessToken}`,
           "Content-Type": "multipart/form-data",
         },
+        withCredentials: true,
       });
       setStatus("dodano wpis");
       setTitle("");

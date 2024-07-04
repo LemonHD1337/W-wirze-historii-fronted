@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { URL_MAP_GET, URL_MAP_UPDATE } from "../services/api/endpoints";
+import authContext from "../store/authContext";
 
 const useUpdateMapLogic = id => {
   const [title, setTitle] = useState("");
@@ -9,6 +10,7 @@ const useUpdateMapLogic = id => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [status, setStatus] = useState("");
+  const { user } = useContext(authContext);
 
   useEffect(() => {
     if (id === 0) return;
@@ -46,7 +48,12 @@ const useUpdateMapLogic = id => {
 
     try {
       setIsUpdating(true);
-      await axios.put(URL_MAP_UPDATE + `/${id}`, data);
+      await axios.put(URL_MAP_UPDATE + `/${id}`, data, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("Zmodyfikowano dane");
     } catch (e) {
       console.log(e);

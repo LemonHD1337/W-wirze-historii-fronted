@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { URL_HF_CREATE } from "../services/api/endpoints";
+import authContext from "../store/authContext";
 
 const useAddHistoricalFigureLogic = () => {
   const [name, setName] = useState("");
   const [pic, setPic] = useState("");
   const [doc, setDoc] = useState("");
+  const { user } = useContext(authContext);
 
   const refPic = useRef();
   const refDoc = useRef();
@@ -34,7 +36,9 @@ const useAddHistoricalFigureLogic = () => {
       await axios.post(URL_HF_CREATE, formdata, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.accessToken}`,
         },
+        withCredentials: true,
       });
 
       setName("");

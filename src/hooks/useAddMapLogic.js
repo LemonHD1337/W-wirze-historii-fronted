@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { URL_MAP_CREATE } from "../services/api/endpoints";
+import authContext from "../store/authContext";
 
 const useAddMapLogic = era => {
   const [title, setTitle] = useState("");
@@ -8,6 +9,7 @@ const useAddMapLogic = era => {
   const [imageURL, setImageURL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const { user } = useContext(authContext);
 
   const validate = () => {
     if (
@@ -42,7 +44,12 @@ const useAddMapLogic = era => {
     };
 
     try {
-      await axios.post(URL_MAP_CREATE, data);
+      await axios.post(URL_MAP_CREATE, data, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("Dodano mapę!");
     } catch (e) {
       console.log(e);

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {
   URL_GUESSDATE_GET,
   URL_GUESSDATE_UPDATE,
 } from "../services/api/endpoints";
+import authContext from "../store/authContext";
 
 const useGuessDateUpdateLogic = id => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,7 @@ const useGuessDateUpdateLogic = id => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [status, setStatus] = useState(null);
+  const { user } = useContext(authContext);
 
   useEffect(() => {
     if (!id || id === 0) return;
@@ -20,7 +22,12 @@ const useGuessDateUpdateLogic = id => {
     (async function () {
       try {
         setIsLoading(true);
-        const res = await axios.get(URL_GUESSDATE_GET + `/${id}`);
+        const res = await axios.get(URL_GUESSDATE_GET + `/${id}`, {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        });
         const { title, day, month, year } = res.data;
         setDay(day);
         setTitle(title);
