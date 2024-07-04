@@ -8,16 +8,16 @@
   html {
     font-family: 'Poppins', sans-serif;
     position: relative;
-    min-height: 100%;
   }
 }
 
+html,
 body{
-  @apply w-screen h-screen max-w-full min-h-screen;
+  @apply h-full m-0 w-full
 }
 
 #root{
-  @apply flex flex-col min-h-full h-1;
+  @apply flex flex-col min-h-full;
 }
 
 .nav-li{
@@ -57,11 +57,11 @@ body{
 }
 
 .form{
-  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5 mt-2
+  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5 mt-2 md:w-full
 }
 
 .addContent-select{
-  @apply input m-5 w-2/5
+  @apply input m-5 w-2/5 md:w-full
 }
 
 .addContent-div{

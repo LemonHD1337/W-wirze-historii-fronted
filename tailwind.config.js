@@ -12,7 +12,9 @@ module.exports = {
         secondary: "#030303",
       },
       screens: {
-        md: { max: "767px" },
+        md: { max: "768px" },
+        mobileS: { max: "320px" },
+        mobileL: { max: "425px" },
         lapL: { max: "1440px" },
         lap: { max: "1024px" },
       },

@@ -41,10 +41,7 @@ const ChangePassword = ({ id }) => {
 
   return (
     <div className="w-full flex justify-center m-3">
-      <form
-        onSubmit={handleSubmit}
-        className="text-center border border-bor rounded-xl shadow p-5 w-1/5"
-      >
+      <form onSubmit={handleSubmit} className="form">
         <h1 className="font-bold text-2xl">Zmień hasło</h1>
         <div className="div-input">
           <input

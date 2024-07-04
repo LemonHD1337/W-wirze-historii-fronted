@@ -77,7 +77,7 @@ const RegisterForm = () => {
         <FaRegEye />
       </div>
 
-      <button className="btn m-2">Stwórz konto</button>
+      <button className="btn ">Stwórz konto</button>
 
       <div className="w-full flex justify-center p-2">
         <p className="font-bold text-pretty w-2/3 ">{error}</p>

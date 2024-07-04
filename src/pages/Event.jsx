@@ -37,14 +37,11 @@ const Event = () => {
   }
 
   return (
-    <div className="w-full h-full flex md:flex-col">
-      <div className="w-full h-full flex md:flex-col">
-        <embed
-          src={BASE_URL + "/static/" + data.document + "#toolbar=0"}
-          width="100%"
-          height="100%"
-        />
-      </div>
+    <div className="w-full h-full flex flex-grow">
+      <embed
+        src={BASE_URL + "/static/" + data.document + "#toolbar=0"}
+        width="100%"
+      />
     </div>
   );
 };

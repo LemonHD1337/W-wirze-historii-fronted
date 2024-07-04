@@ -2,11 +2,15 @@ const HomePage = () => {
   return (
     <div
       className={
-        "w-full h-full flex justify-center items-center flex-wrap flex-grow gap-2 overflow-auto text-center md:p-5"
+        "w-full h-full flex justify-center items-center flex-grow md:p-5"
       }
     >
-      <div className={"border w-2/3 h-2/3 shadow-lg p-5 rounded-xl md:h-auto "}>
-        <h1 className={"text-2xl font-bold p-4 text-center"}>
+      <div
+        className={
+          "border w-2/3 h-2/3 shadow-lg p-5 rounded-xl md:h-auto mobileL:w-full"
+        }
+      >
+        <h1 className={"text-2xl font-bold p-4 text-center mobileS:text-lg"}>
           W wirze historii...
         </h1>
         <p className={"text-lg"}>

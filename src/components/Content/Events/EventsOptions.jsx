@@ -57,7 +57,7 @@ const EventsOptions = () => {
         Aby odpalić narzędzie dodawania wpisu, należy wybrać epokę
         odpowiadającej wydarzeniu
       </p>
-      <select onChange={handleChange} className="input m-5 w-2/5" name="age">
+      <select onChange={handleChange} className="addContent-select" name="age">
         <option value="0">Wybierz epokę</option>
         <option value="Prehistoria">Prehistoria</option>
         <option value="Starożytność">Starożytność</option>

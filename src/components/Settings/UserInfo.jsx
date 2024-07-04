@@ -11,10 +11,7 @@ const UserInfo = ({ id }) => {
 
   return (
     <div className="w-full flex justify-center m-3">
-      <form
-        onSubmit={handleSubmit}
-        className="shadow border border-bor p-5 text-center rounded-xl w-1/5"
-      >
+      <form onSubmit={handleSubmit} className="form">
         <h1 className="font-bold text-2xl">Zmień dane</h1>
         <div className="div-input">
           <input

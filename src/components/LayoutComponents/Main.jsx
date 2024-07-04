@@ -21,10 +21,7 @@ const CreateNewPassword = lazy(() => import("../../pages/CreateNewPassword"));
 
 const Main = () => {
   return (
-    <main
-      id="main"
-      className="w-full flex flex-col h-full relative overflow-hidden"
-    >
+    <main id="main" className="w-full flex flex-col h-full flex-1">
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" exact element={<HomePage />} />

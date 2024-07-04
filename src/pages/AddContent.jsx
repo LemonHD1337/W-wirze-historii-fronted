@@ -35,8 +35,8 @@ const AddContent = () => {
   };
 
   return (
-    <div className="w-full h-full flex ">
-      <aside className="w-1/4 text-center border border-bor border-t-0">
+    <div className="w-full h-full flex md:flex-col">
+      <aside className="w-1/4 text-center border border-bor border-t-0 md:w-full">
         <div
           name="guessDate"
           onClick={handleClick}
@@ -66,7 +66,9 @@ const AddContent = () => {
           Mapa
         </div>
       </aside>
-      <div className="w-3/4 flex flex-col items-center">{showOptions()}</div>
+      <div className="w-3/4 flex flex-col items-center md:w-full">
+        {showOptions()}
+      </div>
     </div>
   );
 };

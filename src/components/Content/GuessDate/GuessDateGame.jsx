@@ -17,8 +17,8 @@ const GuessDateGame = () => {
   if (error) return <Error message={error} />;
 
   return (
-    <div className="p-5 text-center">
-      <div className="guess-date-info">
+    <div className="p-5 text-center ">
+      <div className="guess-date-info mb-10">
         <h2 className="font-bold text-2xl">Informacje o grze</h2>
         <p className="text">
           W tej grze trzeba podać datę wydarzenia podanego poniżej:{" "}

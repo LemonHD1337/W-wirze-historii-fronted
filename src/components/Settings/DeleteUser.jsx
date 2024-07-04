@@ -29,11 +29,8 @@ const DeleteUser = ({ id }) => {
     }
   };
   return (
-    <div className="w-1/5 mt-2">
-      <form
-        onSubmit={handleSubmit}
-        className="text-center border-bor border rounded-xl shadow p-5"
-      >
+    <div className="w-full flex justify-center mt-2">
+      <form onSubmit={handleSubmit} className="form">
         <h1 className="text-2xl font-bold">Usuń konto</h1>
         <button className="btn m-2">
           {isLoading ? "usuwanie..." : "Usuń konto"}
