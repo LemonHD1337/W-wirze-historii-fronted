@@ -5,25 +5,25 @@ import { URL_USER_UPDATE_PASSWORD } from "../../services/api/endpoints";
 const ChangePassword = ({ id }) => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [message, setMessage] = useState();
+  const [status, setStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const isValidated = await checkPasswords();
+    const isValidated = checkPasswords();
+    if (!isValidated || id === null) return;
 
-    if (isValidated && id !== null) {
+    try {
       setIsLoading(true);
-      axios
-        .put(URL_USER_UPDATE_PASSWORD + `/${id}`, { password: password })
-        .then(res => {
-          setMessage("Pomyśle zmieniono hasło");
-        })
-        .catch(err => {
-          console.log(err);
-          setMessage("błąd");
-        })
-        .finally(() => setIsLoading(false));
+      await axios.put(URL_USER_UPDATE_PASSWORD + `/${id}`, {
+        password: password,
+      });
+      setStatus("Pomyśle zmieniono hasło");
+    } catch (e) {
+      console.log(e);
+      setStatus("Błąd");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -32,10 +32,10 @@ const ChangePassword = ({ id }) => {
       if (password === password2) {
         return true;
       } else {
-        setMessage("hasła są różne");
+        setStatus("hasła są różne");
       }
     } else {
-      setMessage("pola nie mogą być puste");
+      setStatus("pola nie mogą być puste");
     }
   };
 
@@ -68,7 +68,7 @@ const ChangePassword = ({ id }) => {
         <button className="btn m-2">
           {isLoading ? "przetwarzanie..." : "zmień hasło"}
         </button>
-        <p>{message}</p>
+        <p>{status}</p>
       </form>
     </div>
   );

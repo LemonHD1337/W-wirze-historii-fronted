@@ -60,7 +60,7 @@ const useRegisterLogic = () => {
 
     const data = {
       name: name,
-      surname: name,
+      surname: surname,
       email: email,
       password: password,
     };

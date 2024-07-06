@@ -63,7 +63,12 @@ const useGuessDateUpdateLogic = id => {
 
     try {
       setIsUpdating(true);
-      await axios.put(URL_GUESSDATE_UPDATE + `/${id}`, data);
+      await axios.put(URL_GUESSDATE_UPDATE + `/${id}`, data, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       setStatus("Zaktualizowano dane");
     } catch (e) {
       console.log(e);

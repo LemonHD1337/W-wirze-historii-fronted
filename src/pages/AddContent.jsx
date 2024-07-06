@@ -35,7 +35,7 @@ const AddContent = () => {
   };
 
   return (
-    <div className="w-full h-full flex md:flex-col">
+    <div className="w-full h-full flex flex-grow md:flex-col">
       <aside className="w-1/4 text-center border border-bor border-t-0 md:w-full">
         <div
           name="guessDate"

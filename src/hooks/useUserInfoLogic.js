@@ -10,7 +10,7 @@ const useUserInfoLogic = id => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     (async function () {
@@ -25,7 +25,7 @@ const useUserInfoLogic = id => {
         setSurname(surname);
         setEmail(email);
       } catch (e) {
-        setError(e);
+        setStatus("Błąd");
         console.log(e);
       } finally {
         setIsLoading(false);
@@ -44,10 +44,11 @@ const useUserInfoLogic = id => {
 
     setIsLoading(true);
     try {
-      await axios.post(URL_USER_UPDATE_DETAILS + `/${id}`, data);
+      await axios.put(URL_USER_UPDATE_DETAILS + `/${id}`, data);
+      setStatus("Pomyślnie zmieniono dane");
     } catch (e) {
       console.log(e);
-      setError(e);
+      setStatus("Błąd");
     } finally {
       setIsLoading(false);
     }
@@ -60,7 +61,7 @@ const useUserInfoLogic = id => {
     if (name === "email") setEmail(value);
   };
 
-  return { isLoading, name, surname, email, error, handleSubmit, onChange };
+  return { isLoading, name, surname, email, status, handleSubmit, onChange };
 };
 
 export default useUserInfoLogic;

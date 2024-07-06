@@ -30,31 +30,27 @@ const AddEvent = ({ era }) => {
           onChange={handleChange}
         />
       </div>
-      <div className="div-input">
-        <label>
-          Dodaj zdjęcie wydarzenia
-          <input
-            className="input"
-            type="file"
-            name="pic"
-            onChange={handleChange}
-            ref={refPic}
-            accept="image/*"
-          />
-        </label>
+      <div className="div-input flex-col">
+        <label>Dodaj zdjęcie wydarzenia</label>
+        <input
+          className="input"
+          type="file"
+          name="pic"
+          onChange={handleChange}
+          ref={refPic}
+          accept="image/*"
+        />
       </div>
-      <div className="div-input">
-        <label>
-          Dodaj treść w word
-          <input
-            className="input"
-            type="file"
-            name="doc"
-            onChange={handleChange}
-            accept="application/pdf"
-            ref={refDoc}
-          />
-        </label>
+      <div className="div-input flex-col ">
+        <label>Dołącz plik o rozszerzeniu pdf zawierający opis postaci</label>
+        <input
+          className="input"
+          type="file"
+          name="doc"
+          onChange={handleChange}
+          accept="application/pdf"
+          ref={refDoc}
+        />
       </div>
       <button className="btn">
         {isLoading ? "przetwarzanie ..." : "dodaj wpis"}

@@ -7,7 +7,7 @@ import {
 } from "../services/api/endpoints";
 import ages from "../utils/ages";
 
-const useMapPage = (ageIndex, mapId) => {
+const useMapPage = (ageIndex, mapId, checked) => {
   const [isLoading, setIsLoading] = useState(false);
   const [mapsList, setMapsList] = useState(null);
   const [waypointsList, setWaypointsList] = useState(null);
@@ -32,7 +32,8 @@ const useMapPage = (ageIndex, mapId) => {
     (async function () {
       try {
         setIsLoading(true);
-        const url = URL_E_GET_ALL_BY_ERA + `/${ages[ageIndex]}`;
+        const url =
+          URL_E_GET_ALL_BY_ERA + `/${ages[ageIndex]}?selectUnused=${checked}`;
         const response = await axios.get(url);
         setEventsList(response.data);
       } catch (e) {
@@ -42,7 +43,7 @@ const useMapPage = (ageIndex, mapId) => {
         setIsLoading(false);
       }
     })();
-  }, [ageIndex]);
+  }, [ageIndex, checked]);
 
   useEffect(() => {
     (async function () {

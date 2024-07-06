@@ -21,12 +21,12 @@ const HomePage = () => {
         </p>
         <br />
         <p className={"text-lg"}>
-          -wpisy o ważnych postaciach oraz wydarzeniach historycznych tutaj
+          -wpisy o ważnych postaciach oraz wydarzeniach historycznych; tutaj
           znajdziemy najważniejsze informacje na poszczególne tematy
         </p>
         <br />
         <p className={"text-lg"}>
-          -mapki z lokalizacjami konkretnych wydarzeń historycznych dzięki nim
+          -mapki z lokalizacjami konkretnych wydarzeń historycznych; dzięki nim
           możemy zobaczyć miejsca wydarzeń, dodatkowo z odwołaniem do ich opisu
         </p>
       </div>

@@ -19,7 +19,8 @@ const MapUpdate = ({ id }) => {
   return (
     <form onSubmit={handleSubmit} className="form">
       <h1 className="addContent-h1">Edytowanie!</h1>
-      <div className="div-input">
+      <div className="div-input flex-col">
+        <label htmlFor="">Nazwa mapy:</label>
         <input
           className="input"
           type="text"
@@ -28,7 +29,8 @@ const MapUpdate = ({ id }) => {
           onChange={handleChange}
         />
       </div>
-      <div className="div-input">
+      <div className="div-input flex-col">
+        <label htmlFor="">Link do strony:</label>
         <input
           type="text"
           name={"source"}
@@ -37,7 +39,8 @@ const MapUpdate = ({ id }) => {
           className="input"
         />
       </div>
-      <div className="div-input">
+      <div className="div-input flex-col">
+        <label htmlFor="">Link do mapy:</label>
         <input
           className="input"
           type="text"

@@ -5,27 +5,22 @@ import { useNavigate } from "react-router-dom";
 
 const DeleteUser = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState(null);
 
   const navigate = new useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (id !== null) {
-      setIsLoading(true);
-      axios
-        .delete(URL_USER_DELETE + `/${id}`)
-        .then(res => {
-          setMessage("usunięto konto");
-        })
-        .catch(err => {
-          console.log(err);
-          setMessage("błąd");
-        })
-        .finally(() => {
-          setIsLoading(false);
-          navigate("/user/logout");
-        });
+    if (id === null) return;
+
+    try {
+      await axios.delete(URL_USER_DELETE + `/${id}`);
+      navigate("/user/logout");
+    } catch (e) {
+      console.log(e);
+      setStatus("Błąd");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -35,7 +30,7 @@ const DeleteUser = ({ id }) => {
         <button className="btn m-2">
           {isLoading ? "usuwanie..." : "Usuń konto"}
         </button>
-        <p>{message}</p>
+        <p>{status}</p>
       </form>
     </div>
   );

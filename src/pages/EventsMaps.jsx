@@ -17,6 +17,7 @@ const EventsMaps = () => {
   const [source, setSource] = useState("");
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
+  const [checked, setChecked] = useState(true);
 
   const {
     isLoading,
@@ -25,7 +26,7 @@ const EventsMaps = () => {
     waypointsList,
     error,
     setWaypointsList,
-  } = useMapPage(era, mapId);
+  } = useMapPage(era, mapId, checked);
 
   if (isLoading) return <Loading />;
   if (!mapsList) return <Warning message={"Brak map"} />;
@@ -58,7 +59,14 @@ const EventsMaps = () => {
           onChange={onMapSelect}
           map={map}
         />
-        <AddWaypoint lat={lat} lng={lng} eventsList={eventsList} id={mapId} />
+        <AddWaypoint
+          lat={lat}
+          lng={lng}
+          eventsList={eventsList}
+          id={mapId}
+          checked={checked}
+          setChecked={setChecked}
+        />
         <DeleteWaypoint waypoints={waypointsList} />
       </div>
       <div className="w-full flex items-center justify-center lap:w-full lap:h-96">

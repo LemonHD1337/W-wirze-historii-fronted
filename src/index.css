@@ -45,7 +45,7 @@ body{
 }
 
 .input{
-  @apply border border-bor rounded-2xl p-2;
+  @apply border border-bor rounded-2xl p-2 w-2/3 md:w-full;
 }
 
 #map{
@@ -57,7 +57,7 @@ body{
 }
 
 .form{
-  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5 mt-2 md:w-full
+  @apply text-center p-5 border border-bor rounded-xl shadow w-2/5 mt-2 lap:w-full
 }
 
 .addContent-select{

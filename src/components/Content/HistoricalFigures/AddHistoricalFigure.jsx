@@ -29,35 +29,28 @@ const AddHistoricalFigure = () => {
         />
       </div>
 
-      <div className="div-input">
-        <label>
-          dodaj zdjęcie postaci
-          <br />
-          <input
-            type="file"
-            name="pic"
-            onChange={handleChange}
-            className="input"
-            accept="image/*"
-            ref={refPic}
-          />
-        </label>
+      <div className="div-input flex-col">
+        <label>dodaj zdjęcie postaci</label>
+        <input
+          type="file"
+          name="pic"
+          onChange={handleChange}
+          className="input"
+          accept="image/*"
+          ref={refPic}
+        />
       </div>
 
-      <div className="div-input">
-        <br />
-        <label>
-          Dołącz plik o rozszerzeniu pdf zawierający opis postaci
-          <br />
-          <input
-            type="file"
-            name="doc"
-            onChange={handleChange}
-            className="input"
-            accept="application/pdf"
-            ref={refDoc}
-          />
-        </label>
+      <div className="div-input flex-col ">
+        <label>Dołącz plik o rozszerzeniu pdf zawierający opis postaci </label>
+        <input
+          type="file"
+          name="doc"
+          onChange={handleChange}
+          className="input"
+          accept="application/pdf"
+          ref={refDoc}
+        />
       </div>
 
       <div>

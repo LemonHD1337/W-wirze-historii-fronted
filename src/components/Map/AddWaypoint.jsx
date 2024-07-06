@@ -3,7 +3,7 @@ import Loading from "../shared/Loading";
 import { useContext } from "react";
 import authContext from "../../store/authContext";
 
-const AddWaypoint = ({ eventsList, lat, lng, id }) => {
+const AddWaypoint = ({ checked, setChecked, eventsList, lat, lng, id }) => {
   const { status, isLoading, handleSubmit, handleChange } = useAddWayLogic(
     lat,
     lng,
@@ -23,12 +23,10 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
       className=" border-w-full m-2 text-centery-2 border-bor p-5"
     >
       <h1 className="font-bold text-2xl p-2">Dodaj zaznacznik</h1>
-
       <p className="font-lg p-2">
         Aby dodać zaznacznik, należy kliknąć na mapie w odpowiednim miejscu i
         wybrać odpowiednie wydarzenie
       </p>
-
       <select className="input w-full" onChange={handleChange}>
         <option value="0">wybierz wpis do zaznacznika</option>
         {eventsList.map((event, index) => {
@@ -40,7 +38,20 @@ const AddWaypoint = ({ eventsList, lat, lng, id }) => {
         })}
       </select>
       <br />
+
       <input
+        type="checkbox"
+        id={"selectOnlyNotUsed"}
+        checked={checked}
+        onChange={e => setChecked(!checked)}
+      />
+      <label htmlFor="selectOnlyNotUsed" className={"font-lg p-2"}>
+        Szukać wpisów niewykorzystanych
+      </label>
+
+      <br />
+      <input
+        name={"checkbox"}
         type="text"
         placeholder="Latitude"
         value={lat}
